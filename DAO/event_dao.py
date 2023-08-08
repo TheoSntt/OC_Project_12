@@ -1,4 +1,4 @@
-from models import Event
+from models.event import Event
 
 
 class EventDao:

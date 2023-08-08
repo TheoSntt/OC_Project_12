@@ -1,7 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 import configparser
-from models import Base
 
 
 # Create a configparser object and read the config.ini file
@@ -21,10 +20,3 @@ engine = create_engine(connection_string, echo=True)
 # Creating the SQLAlchemy session
 Session = sessionmaker(bind=engine)
 session = Session()
-
-
-def create_tables():
-    Base.metadata.create_all(engine)
-
-# You can call this function to create the tables when needed
-# create_tables()

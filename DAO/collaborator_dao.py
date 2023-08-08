@@ -1,4 +1,4 @@
-from models import Collaborator
+from models.collaborator import Collaborator
 
 
 class CollaboratorDao:

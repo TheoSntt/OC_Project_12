@@ -1,4 +1,4 @@
-from models import Contract
+from models.contract import Contract
 
 
 class ContractDao:
