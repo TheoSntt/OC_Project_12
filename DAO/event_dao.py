@@ -5,16 +5,19 @@ class EventDao:
     def __init__(self, db_session):
         self.db_session = db_session
 
-    def fetch_by_id(self, collaborator_id):
-        return self.db_session.query(Event).get(collaborator_id)
+    def fetch_by_id(self, event_id):
+        return self.db_session.get(Event, event_id)
 
-    def save(self, user):
-        self.db_session.add(user)
+    def get_by_expression(self, expression):
+        return self.db_session.query(Event).filter(expression).all()
+
+    def create(self, event):
+        self.db_session.add(event)
         self.db_session.commit()
 
-    def update(self, user):
+    def update(self, event):
         self.db_session.commit()
 
-    def delete(self, user):
-        self.db_session.delete(user)
+    def delete(self, event):
+        self.db_session.delete(event)
         self.db_session.commit()
