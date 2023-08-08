@@ -1,24 +1,6 @@
 from sqlalchemy import Column, Integer, Float, String, Date, ForeignKey, Enum
-from sqlalchemy.orm import declarative_base
-from sqlalchemy.orm import relationship
-from sqlalchemy import create_engine
-import configparser
+from sqlalchemy.orm import declarative_base, relationship
 
-
-# Create a configparser object and read the config.ini file
-config = configparser.ConfigParser()
-config.read('config.ini')
-
-# Read the values from the [mysql] section
-username = config['mysql']['username']
-password = config['mysql']['password']
-host = config['mysql']['host']
-port = config['mysql']['port']
-dbname = config['mysql']['dbname']
-
-
-connection_string = f"mysql+mysqlconnector://{username}:{password}@{host}:{port}/{dbname}"
-engine = create_engine(connection_string, echo=True)
 
 Base = declarative_base()
 
@@ -31,6 +13,9 @@ class Person(Base):
     surname = Column(String(255))
     email = Column(String(255))
     telephone = Column(Integer)
+
+    def __repr__(self):
+        return f'{self.name} {self.surname}'
 
 
 class Client(Person):
@@ -63,12 +48,16 @@ class Contract(Base):
     client_id = Column(Integer, ForeignKey('client.id'))
     client = relationship("Client", back_populates="contracts")
 
+    def __repr__(self):
+        return f'Contrat {self.id}'
+
 
 class Event(Base):
     __tablename__ = 'event'
 
     id = Column(Integer, primary_key=True)
 
+    title = Column(String(255))
     start_date = Column(Date)
     end_date = Column(Date)
     location = Column(String(1000))
@@ -81,4 +70,5 @@ class Event(Base):
     contract_id = Column(Integer, ForeignKey('contract.id'))
     contract = relationship("Contract", back_populates="event")
 
-Base.metadata.create_all(engine)
+    def __repr__(self):
+        return f'{self.title}'
