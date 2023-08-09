@@ -9,6 +9,8 @@ class Client(Person):
     enterprise_name = Column(String(255))
     create_date = Column(Date)
     last_update_date = Column(Date)
-
-    contact_id = Column(Integer, ForeignKey('collaborator.id'))
+    # Relationship with Collaborator (commercial contact for the client)
+    contact_id = Column(Integer, ForeignKey('collaborator.id', ondelete="SET NULL"))
     contact = relationship("Collaborator", back_populates="clients")
+    # Relationship with Contract (contracts linked to the client)
+    contracts = relationship("Contract", back_populates="client")

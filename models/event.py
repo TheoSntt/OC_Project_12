@@ -14,11 +14,11 @@ class Event(Base):
     location = Column(String(1000))
     attendees = Column(Integer)
     comments = Column(String(1000))
-
-    support_id = Column(Integer, ForeignKey('collaborator.id'))
+    # Relationship with Collaborator (support in charge of the event)
+    support_id = Column(Integer, ForeignKey('collaborator.id', ondelete="SET NULL"))
     support = relationship("Collaborator", back_populates="events")
-
-    contract_id = Column(Integer, ForeignKey('contract.id'))
+    # Relationship with Contract (Contract for the event)
+    contract_id = Column(Integer, ForeignKey('contract.id', ondelete="SET NULL"))
     contract = relationship("Contract", back_populates="event")
 
     def __repr__(self):

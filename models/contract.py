@@ -11,9 +11,11 @@ class Contract(Base):
     remaining_to_pay = Column(Float)
     create_date = Column(Date)
     status = Column(String(255))
-
-    client_id = Column(Integer, ForeignKey('client.id'))
+    # Relationship with Client (client to whom the contract is linked)
+    client_id = Column(Integer, ForeignKey('client.id', ondelete="SET NULL"))
     client = relationship("Client", back_populates="contracts")
+    # Relationship with Event (event to which the contract is linked)
+    event = relationship("Event", back_populates="contract")
 
     def __repr__(self):
         return f'Contrat {self.id}'
