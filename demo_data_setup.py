@@ -85,3 +85,6 @@ first_event = Event(
     support_id=second_collaborator.id,
     contract_id=first_contract.id)
 event_dao.create(first_event)
+
+first_event.location = "Petaouchnok-les-bains"
+event_dao.update(first_event)
