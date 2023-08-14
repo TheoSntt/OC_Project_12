@@ -14,20 +14,20 @@ from datetime import date
 
 
 # Drop tables if model changed
-# Collaborator.__table__.drop(engine)
-# Client.__table__.drop(engine)
-# Contract.__table__.drop(engine)
-# Event.__table__.drop(engine)
+Collaborator.__table__.drop(engine)
+Client.__table__.drop(engine)
+Contract.__table__.drop(engine)
+Event.__table__.drop(engine)
 
 # Create (or update) tables based on model definitions
-# Base.metadata.create_all(engine)
+Base.metadata.create_all(engine)
 
 # Empty the tables
-session.query(Collaborator).delete()
-session.query(Client).delete()
-session.query(Contract).delete()
-session.query(Event).delete()
-session.commit()
+# session.query(Collaborator).delete()
+# session.query(Client).delete()
+# session.query(Contract).delete()
+# session.query(Event).delete()
+# session.commit()
 
 # Instanciate DAOs
 client_dao = ClientDao(session)
