@@ -6,10 +6,15 @@
 from models.collaborator import Collaborator
 # from models.contract import Contract
 # from models.event import Event
+from auth.security.hash_password import hash_password
 
 
 class CollaboratorRepository:
-    def __init__(self, client_dao, contract_dao, event_dao, collaborator_dao):
+    def __init__(self,
+                 # client_dao,
+                 # contract_dao,
+                 # event_dao,
+                 collaborator_dao):
         # self.client_dao = client_dao
         # self.contract_dao = contract_dao
         # self.event_dao = event_dao
@@ -24,12 +29,19 @@ class CollaboratorRepository:
 
     def create_collaborator(self, collaborator_data):
         collaborator = Collaborator(**collaborator_data)
-        self.collaborator_dao.save(collaborator)
+        collaborator.password = hash_password(collaborator.password)
+        self.collaborator_dao.create(collaborator)
+        return collaborator
 
     def update_collaborator(self, collaborator_id, new_data):
         collaborator = self.collaborator_dao.fetch_by_id(collaborator_id)
         if collaborator:
             # Update user's data based on new_data
+            collaborator.username = new_data.get('username', collaborator.username)
+            if new_data.get('password'):
+                collaborator.password = hash_password(new_data.get('password'))
+            # collaborator.password = new_data.get('password', collaborator.password)
+            collaborator.surname = new_data.get('surname', collaborator.surname)
             collaborator.name = new_data.get('name', collaborator.name)
             collaborator.surname = new_data.get('surname', collaborator.surname)
             collaborator.email = new_data.get('email', collaborator.email)

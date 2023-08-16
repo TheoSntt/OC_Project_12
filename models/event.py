@@ -1,5 +1,5 @@
 from models.base import Base
-from sqlalchemy import Column, Integer, String, Date, ForeignKey
+from sqlalchemy import Column, Integer, String, Date, ForeignKey, UniqueConstraint
 from sqlalchemy.orm import relationship
 
 
@@ -8,9 +8,9 @@ class Event(Base):
 
     id = Column(Integer, primary_key=True)
 
-    title = Column(String(255))
-    start_date = Column(Date)
-    end_date = Column(Date)
+    title = Column(String(255), nullable=False)
+    start_date = Column(Date, nullable=False)
+    end_date = Column(Date, nullable=False)
     location = Column(String(1000))
     attendees = Column(Integer)
     comments = Column(String(1000))
@@ -20,6 +20,10 @@ class Event(Base):
     # Relationship with Contract (Contract for the event)
     contract_id = Column(Integer, ForeignKey('contract.id', ondelete="SET NULL"))
     contract = relationship("Contract", back_populates="event")
+
+    __table_args__ = (
+        UniqueConstraint('title', 'start_date', 'end_date', name='uq_name_date'),
+    )
 
     def __repr__(self):
         return f'{self.title}'

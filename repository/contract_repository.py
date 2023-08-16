@@ -6,10 +6,16 @@
 # from models.collaborator import Collaborator
 from models.contract import Contract
 # from models.event import Event
+from datetime import date
 
 
 class ContractRepository:
-    def __init__(self, client_dao, contract_dao, event_dao, collaborator_dao):
+    def __init__(self,
+                 # client_dao,
+                 contract_dao,
+                 # event_dao,
+                 # collaborator_dao
+                 ):
         # self.client_dao = client_dao
         self.contract_dao = contract_dao
         # self.event_dao = event_dao
@@ -23,8 +29,10 @@ class ContractRepository:
     #     return self.event_dao.get_events_for_user(contract_id)
 
     def create_contract(self, contract_data):
-        contract = Contract(**contract_data)
-        self.contract_dao.save(contract)
+        contract = Contract(**contract_data,
+                            create_date=date.today())
+        self.contract_dao.create(contract)
+        return contract
 
     def update_contract(self, contract_id, new_data):
         contract = self.contract_dao.fetch_by_id(contract_id)

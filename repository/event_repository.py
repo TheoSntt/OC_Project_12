@@ -9,7 +9,12 @@ from models.event import Event
 
 
 class EventRepository:
-    def __init__(self, client_dao, event_dao, contract_dao, collaborator_dao):
+    def __init__(self,
+                 # client_dao,
+                 event_dao,
+                 # contract_dao,
+                 # collaborator_dao
+                 ):
         # self.client_dao = client_dao
         # self.contract_dao = contract_dao
         self.event_dao = event_dao
@@ -24,7 +29,8 @@ class EventRepository:
 
     def create_event(self, event_data):
         event = Event(**event_data)
-        self.event_dao.save(event)
+        self.event_dao.create(event)
+        return event
 
     def update_eventt(self, event_id, new_data):
         event = self.event_dao.fetch_by_id(event_id)

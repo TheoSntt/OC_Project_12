@@ -16,7 +16,7 @@ dbname = config['mysql']['dbname']
 
 # Creating the SQLAlchemy engine
 connection_string = f"mysql+mysqlconnector://{username}:{password}@{host}:{port}/{dbname}"
-engine = create_engine(connection_string, echo=True)
+engine = create_engine(connection_string, echo=False)
 # Creating the SQLAlchemy session
 Session = sessionmaker(bind=engine)
 session = Session()
