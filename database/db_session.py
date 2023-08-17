@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 import configparser
+import os
 
 
 # Create a configparser object and read the config.ini file
@@ -8,8 +9,8 @@ config = configparser.ConfigParser()
 config.read('config.ini')
 
 # Read the values from the [mysql] section
-username = config['mysql']['username']
-password = config['mysql']['password']
+username = os.environ.get("MYSQL_PROJECT_USERNAME")
+password = os.environ.get("MYSQL_PROJECT_PW")
 host = config['mysql']['host']
 port = config['mysql']['port']
 dbname = config['mysql']['dbname']
