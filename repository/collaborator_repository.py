@@ -24,6 +24,8 @@ class CollaboratorRepository:
     def get_by_id(self, collaborator_id):
         return self.collaborator_dao.fetch_by_id(collaborator_id)
 
+    def get_by_username(self, username):
+        return self.collaborator_dao.get_by_expression(Collaborator.username == username)
     # def get_collaborator_events(self, collaborator_id):
     #     return self.event_dao.get_events_for_user(collaborator_id)
 
@@ -46,7 +48,7 @@ class CollaboratorRepository:
             collaborator.surname = new_data.get('surname', collaborator.surname)
             collaborator.email = new_data.get('email', collaborator.email)
             collaborator.telephone = new_data.get('telephone', collaborator.telephone)
-            collaborator.role = new_data.get('role', collaborator.role)
+            collaborator.role_id = new_data.get('role_id', collaborator.role_id)
             self.collaborator_dao.update(collaborator)
 
     def delete_collaborator(self, collaborator_id):
