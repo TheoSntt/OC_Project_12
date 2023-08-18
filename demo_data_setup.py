@@ -63,16 +63,6 @@ session.add(sales_role)
 session.add(support_role)
 session.commit()
 
-# first_collaborator = Collaborator(
-#     username="jeanbon",
-#     password="123jean456",
-#     name="Jean",
-#     surname="Bon",
-#     email="jean.bon@gmail.com",
-#     telephone="0612564321",
-#     role_id=sales_role.id
-#     )
-# collaborator_dao.create(first_collaborator)
 first_collab_data = {
     'username': "jeanbon",
     'password': "123jean456",
@@ -83,16 +73,6 @@ first_collab_data = {
     'role_id': sales_role.id}
 first_collaborator = collaborator_repo.create_collaborator(first_collab_data)
 
-# second_collaborator = Collaborator(
-#     username="jeannebon",
-#     password="456jeanne123",
-#     name="Jeanne",
-#     surname="Bon",
-#     email="jeanne.bon@gmail.com",
-#     telephone="0605102577",
-#     role_id=support_role.id
-#     )
-# collaborator_dao.create(second_collaborator)
 second_collab_data = {
     'username': "jeannebon",
     'password': "456jeanne123",
@@ -103,17 +83,6 @@ second_collab_data = {
     'role_id': sales_role.id}
 second_collaborator = collaborator_repo.create_collaborator(second_collab_data)
 
-
-# first_client = Client(
-#     name="Jean-Michel",
-#     surname="Clientelle",
-#     email="jm-clientelle@wanadoo.fr",
-#     telephone="0607050401",
-#     enterprise_name="Bellevie",
-#     create_date=date(2022, 5, 15),
-#     last_update_date=date(2023, 8, 9),
-#     contact_id=first_collaborator.id)
-# client_dao.create(first_client)
 first_client_data = {
     'name': "Jean-Michel",
     'surname': "Clientelle",
@@ -126,14 +95,6 @@ first_client_data = {
 }
 first_client = client_repo.create_client(first_client_data)
 
-# first_contract = Contract(
-#     legal_id='156A24B',
-#     price=1240.25,
-#     remaining_to_pay=220.25,
-#     create_date=date(2023, 5, 1),
-#     status="En cours",
-#     client_id=first_client.id)
-# contract_dao.create(first_contract)
 
 first_contract_data = {
     'legal_id': '156A24B',
@@ -145,16 +106,6 @@ first_contract_data = {
 }
 first_contract = contract_repo.create_contract(first_contract_data)
 
-# first_event = Event(
-#     title="Mariage super",
-#     start_date=date(2023, 9, 30),
-#     end_date=date(2023, 10, 2),
-#     location="Petaouchnok",
-#     attendees=234,
-#     comments="Ca va être chouette",
-#     support_id=second_collaborator.id,
-#     contract_id=first_contract.id)
-# event_dao.create(first_event)
 first_event_data = {
     'title': "Mariage super",
     'start_date': date(2023, 9, 30),

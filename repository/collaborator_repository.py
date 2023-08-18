@@ -6,7 +6,7 @@
 from models.collaborator import Collaborator
 # from models.contract import Contract
 # from models.event import Event
-from auth.security.hash_password import hash_password
+from auth.auth_utility.hash_password import hash_password
 
 
 class CollaboratorRepository:

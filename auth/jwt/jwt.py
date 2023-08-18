@@ -7,14 +7,14 @@ class JWTHandler:
     def __init__(self):
         self.secret_key = None  # Initialize as None
 
-    def load_secret_key(self):
+    def _load_secret_key(self):
         self.secret_key = os.environ.get("MYSQL_PROJECT_JWT_KEY")
         if self.secret_key is None:
             raise ValueError("JWT_SECRET_KEY environment variable is not set")
 
     def generate_token(self, payload):
         if self.secret_key is None:
-            self.load_secret_key()
+            self._load_secret_key()
 
         token = jwt.encode(payload, self.secret_key, algorithm="HS256")
 
@@ -22,8 +22,6 @@ class JWTHandler:
         self._clear_secret_key()
 
         return token
-
-    # Other methods...
 
     def _clear_secret_key(self):
         if self.secret_key:
