@@ -14,3 +14,19 @@ class Collaborator(Person, UniqueEmailMixin):
     # role = Column(Enum("administrator", "sales", "support"))
     role_id = Column(Integer, ForeignKey('role.id', ondelete="SET NULL"))
     role = relationship("Role", back_populates="collaborators")
+
+    def detailed_view(self):
+        detailed_view_string = (f"Name : {self.name}"
+                                f"\nSurname : {self.surname}"
+                                f"\nEmail : {self.email}"
+                                f"\nTelephone : {self.telephone}"
+                                f"\nRôle : {self.role}")
+        if self.role == "Sales":
+            detailed_view_string += "\nClients : "
+            for client in self.clients:
+                detailed_view_string += f"\n   - {client}"
+        if self.role == "Support":
+            detailed_view_string += "\nEvénements : "
+            for event in self.events:
+                detailed_view_string += f"\n   - {event}"
+        return detailed_view_string

@@ -3,7 +3,7 @@ from passlib.utils import saslprep
 import time
 
 
-cryptcontext = CryptContext.from_path('auth/security/security.ini')
+cryptcontext = CryptContext.from_path('auth/auth_utility/security.ini')
 
 
 if __name__ == '__main__':

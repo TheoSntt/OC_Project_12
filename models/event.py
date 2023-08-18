@@ -23,7 +23,19 @@ class Event(Base):
 
     __table_args__ = (
         UniqueConstraint('title', 'start_date', 'end_date', name='uq_name_date'),
+        UniqueConstraint('contract_id', name='uq_contractid'),
     )
 
     def __repr__(self):
         return f'{self.title}'
+
+    def detailed_view(self):
+        detailed_view_string = (f"Nom : {self.title}"
+                                f"\nDate de début : {self.start_date}"
+                                f"\nDate de fin : {self.end_date}"
+                                f"\nLocalisation : {self.location}"
+                                f"\nParticipants : {self.attendees}"
+                                f"\nNotes : {self.comments}"
+                                f"\nOrganisateur : {self.support}"
+                                f"\nContrat associé : {self.contract}")
+        return detailed_view_string

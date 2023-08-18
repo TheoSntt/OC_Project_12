@@ -13,12 +13,12 @@ class Controler:
 
     def get_all_collabs(self):
         self.collabrepo.get_all()
-    
+
     def get_all_clients(self):
         self.clientrepo.get_all()
-    
+
     def get_all_contracts(self):
         self.contractrepo.get_all()
-    
+
     def get_all_events(self):
         self.eventrepo.get_all()

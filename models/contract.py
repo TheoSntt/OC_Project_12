@@ -18,11 +18,21 @@ class Contract(Base):
     client_id = Column(Integer, ForeignKey('client.id', ondelete="SET NULL"))
     client = relationship("Client", back_populates="contracts")
     # Relationship with Event (event to which the contract is linked)
-    event = relationship("Event", back_populates="contract")
+    event = relationship("Event", uselist=False, back_populates="contract")
 
     __table_args__ = (
         UniqueConstraint('legal_id', name='uq_legalid'),
     )
 
     def __repr__(self):
-        return f'Contrat {self.id}'
+        return f'Contrat {self.legal_id}'
+
+    def detailed_view(self):
+        detailed_view_string = (f"Identifiant : {self.legal_id}"
+                                f"\nPrix : {self.price}"
+                                f"\nRestant à payer : {self.remaining_to_pay}"
+                                f"\nDate de création : {self.create_date}"
+                                f"\nStatut : {self.status}"
+                                f"\nClient : {self.client}"
+                                f"\nEvénement associé : {self.event}")
+        return detailed_view_string
