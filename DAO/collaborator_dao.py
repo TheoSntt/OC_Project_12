@@ -8,6 +8,9 @@ class CollaboratorDao:
     def fetch_by_id(self, collaborator_id):
         return self.db_session.get(Collaborator, collaborator_id)
 
+    def get_all(self):
+        return self.db_session.query(Collaborator).all()
+
     def get_by_expression(self, expression):
         return self.db_session.query(Collaborator).filter(expression).all()
 

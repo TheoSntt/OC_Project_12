@@ -25,6 +25,8 @@ class ClientRepository:
     def get_by_id(self, client_id):
         return self.client_dao.fetch_by_id(client_id)
 
+    def get_all(self):
+        return self.client_dao.get_all()
     # def get_client_events(self, client_id):
     #     return self.event_dao.get_events_for_user(client_id)
 

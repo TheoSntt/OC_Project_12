@@ -8,6 +8,9 @@ class EventDao:
     def fetch_by_id(self, event_id):
         return self.db_session.get(Event, event_id)
 
+    def get_all(self):
+        return self.db_session.query(Event).all()
+
     def get_by_expression(self, expression):
         return self.db_session.query(Event).filter(expression).all()
 

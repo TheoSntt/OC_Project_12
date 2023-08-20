@@ -8,6 +8,9 @@ class ContractDao:
     def fetch_by_id(self, contract_id):
         return self.db_session.get(Contract, contract_id)
 
+    def get_all(self):
+        return self.db_session.query(Contract).all()
+
     def get_by_expression(self, expression):
         return self.db_session.query(Contract).filter(expression).all()
 

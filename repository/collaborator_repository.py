@@ -27,6 +27,9 @@ class CollaboratorRepository:
     def get_by_id(self, collaborator_id):
         return self.collaborator_dao.fetch_by_id(collaborator_id)
 
+    def get_all(self):
+        return self.collaborator_dao.get_all()
+
     def get_by_username(self, username):
         return self.collaborator_dao.get_by_expression(Collaborator.username == username)
     # def get_collaborator_events(self, collaborator_id):

@@ -24,6 +24,8 @@ class EventRepository:
     def get_by_id(self, event_id):
         return self.event_dao.fetch_by_id(event_id)
 
+    def get_all(self):
+        return self.event_dao.get_all()
     # def get_client_events(self, event_id):
     #     return self.event_dao.get_events_for_user(event_id)
 

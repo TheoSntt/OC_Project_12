@@ -8,6 +8,9 @@ class ClientDao:
     def fetch_by_id(self, client_id):
         return self.db_session.get(Client, client_id)
 
+    def get_all(self):
+        return self.db_session.query(Client).all()
+
     def get_by_expression(self, expression):
         return self.db_session.query(Client).filter(expression).all()
 

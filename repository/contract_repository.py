@@ -25,6 +25,8 @@ class ContractRepository:
     def get_by_id(self, contract_id):
         return self.contract_dao.fetch_by_id(contract_id)
 
+    def get_all(self):
+        return self.contract_dao.get_all()
     # def get_client_events(self, contract_id):
     #     return self.event_dao.get_events_for_user(contract_id)
 
