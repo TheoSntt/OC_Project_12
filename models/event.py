@@ -30,7 +30,8 @@ class Event(Base):
         return f'{self.title}'
 
     def detailed_view(self):
-        detailed_view_string = (f"Nom : {self.title}"
+        detailed_view_string = (f"Identifiant : {self.id}"
+                                f"Nom : {self.title}"
                                 f"\nDate de début : {self.start_date}"
                                 f"\nDate de fin : {self.end_date}"
                                 f"\nLocalisation : {self.location}"

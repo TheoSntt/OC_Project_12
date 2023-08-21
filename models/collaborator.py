@@ -16,7 +16,8 @@ class Collaborator(Person, UniqueEmailMixin):
     role = relationship("Role", back_populates="collaborators")
 
     def detailed_view(self):
-        detailed_view_string = (f"Name : {self.name}"
+        detailed_view_string = (f"Identifiant : {self.id}"
+                                f"Name : {self.name}"
                                 f"\nSurname : {self.surname}"
                                 f"\nEmail : {self.email}"
                                 f"\nTelephone : {self.telephone}"
