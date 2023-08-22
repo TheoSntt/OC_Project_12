@@ -29,7 +29,7 @@ class Contract(Base):
 
     def detailed_view(self):
         detailed_view_string = (f"Identifiant : {self.id}"
-                                f"Identifiant métier : {self.legal_id}"
+                                f"\nIdentifiant métier : {self.legal_id}"
                                 f"\nPrix : {self.price}"
                                 f"\nRestant à payer : {self.remaining_to_pay}"
                                 f"\nDate de création : {self.create_date}"

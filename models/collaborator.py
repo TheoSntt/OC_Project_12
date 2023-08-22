@@ -17,7 +17,7 @@ class Collaborator(Person, UniqueEmailMixin):
 
     def detailed_view(self):
         detailed_view_string = (f"Identifiant : {self.id}"
-                                f"Name : {self.name}"
+                                f"\nName : {self.name}"
                                 f"\nSurname : {self.surname}"
                                 f"\nEmail : {self.email}"
                                 f"\nTelephone : {self.telephone}"
