@@ -1,4 +1,4 @@
-import os
+import json
 
 
 class Utilities:
@@ -6,16 +6,18 @@ class Utilities:
 
     def store_token(self, token):
         # Store token
-        os.environ["EPICEVENTS_TOKEN"] = token
-        print("So supposedly i stored the token")
-        token = os.environ.get("EPICEVENTS_TOKEN")
-        print(token)
+        data = {
+            "token": token
+            }
+        with open("UI/token/token.json", "w") as json_file:
+            json.dump(data, json_file)
 
     def get_token_or_prompt_for_login(self):
         # Retrieve token
-        token = os.environ.get("EPICEVENTS_TOKEN")
-        if token:
-            pass
+        with open("UI/token/token.json", "r") as json_file:
+            data = json.load(json_file)
+
+        token = data["token"]
 
 
 ui_utils = Utilities()

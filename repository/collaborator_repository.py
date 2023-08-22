@@ -7,6 +7,7 @@ from models.collaborator import Collaborator
 # from models.contract import Contract
 # from models.event import Event
 from auth.auth_handler import AuthHandler
+from repository.has_permission_decorator import has_permission
 
 
 auth_handler = AuthHandler()
@@ -27,7 +28,8 @@ class CollaboratorRepository:
     def get_by_id(self, collaborator_id):
         return self.collaborator_dao.fetch_by_id(collaborator_id)
 
-    def get_all(self):
+    @has_permission(permission="read_collab")
+    def get_all(self, token):
         return self.collaborator_dao.get_all()
 
     def get_by_username(self, username):

@@ -7,6 +7,7 @@ from models.client import Client
 # from models.contract import Contract
 # from models.event import Event
 from datetime import date
+from repository.has_permission_decorator import has_permission
 
 
 class ClientRepository:
@@ -25,7 +26,8 @@ class ClientRepository:
     def get_by_id(self, client_id):
         return self.client_dao.fetch_by_id(client_id)
 
-    def get_all(self):
+    @has_permission(permission="read_client")
+    def get_all(self, token):
         return self.client_dao.get_all()
     # def get_client_events(self, client_id):
     #     return self.event_dao.get_events_for_user(client_id)

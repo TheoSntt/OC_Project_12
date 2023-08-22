@@ -41,9 +41,9 @@ class JWTHandler:
             # Securely clear the secret key from memory
             self._clear_secret_key()
             # Handle token expiration
-            return None
+            return jwt.ExpiredSignatureError
         except jwt.DecodeError:
             # Securely clear the secret key from memory
             self._clear_secret_key()
             # Handle token verification failure
-            return None
+            return jwt.DecodeError
