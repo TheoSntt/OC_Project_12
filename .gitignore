@@ -3,3 +3,4 @@ config.ini
 .flake8
 __pycache__
 test.py
+/UI/token/token.json
