@@ -80,7 +80,7 @@ second_collab_data = {
     'surname': "Bon",
     'email': "jeanne.bon@gmail.com",
     'telephone': "0605102577",
-    'role_id': sales_role.id}
+    'role_id': support_role.id}
 second_collaborator = collaborator_repo.create_collaborator(second_collab_data)
 
 first_client_data = {

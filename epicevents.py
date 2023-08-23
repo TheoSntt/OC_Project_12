@@ -1,6 +1,10 @@
 import click
 from UI.click_commands.login import login
-from UI.click_commands.print_stuff import print_stuff
+# from UI.click_commands.print_stuff import print_stuff
+from UI.click_commands.clients.show_all_clients import show_all_clients
+from UI.click_commands.collabs.show_all_collabs import show_all_collaborators
+from UI.click_commands.contracts.show_all_contracts import show_all_contracts
+from UI.click_commands.events.show_all_events import show_all_events
 # from rich.panel import Panel
 # from rich.console import Console
 # from rich.padding import Padding
@@ -36,9 +40,11 @@ def hello(count, name, japon):
             click.echo(f"Hello, {name}!")
 
 
-cli.add_command(hello)
 cli.add_command(login)
-cli.add_command(print_stuff)
+cli.add_command(show_all_clients)
+cli.add_command(show_all_collaborators)
+cli.add_command(show_all_contracts)
+cli.add_command(show_all_events)
 # @click.command()
 # @click.password_option()
 # def encrypt(password):

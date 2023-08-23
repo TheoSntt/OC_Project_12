@@ -6,6 +6,7 @@
 # from models.collaborator import Collaborator
 # from models.contract import Contract
 from models.event import Event
+from repository.has_permission_decorator import has_permission
 
 
 class EventRepository:
@@ -24,7 +25,8 @@ class EventRepository:
     def get_by_id(self, event_id):
         return self.event_dao.fetch_by_id(event_id)
 
-    def get_all(self):
+    @has_permission(permission="read_event")
+    def get_all(self, token):
         return self.event_dao.get_all()
     # def get_client_events(self, event_id):
     #     return self.event_dao.get_events_for_user(event_id)

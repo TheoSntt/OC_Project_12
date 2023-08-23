@@ -1,4 +1,3 @@
-import click
 import jwt
 from functools import wraps
 from auth.auth_handler import AuthHandler
