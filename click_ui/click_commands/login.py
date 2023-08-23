@@ -1,7 +1,7 @@
 import click
 import os
 from appcontainer import app_container
-from UI.utilities import ui_utils
+from click_ui.utilities import ui_utils
 
 
 auth_handler = app_container.get_auth_handler()

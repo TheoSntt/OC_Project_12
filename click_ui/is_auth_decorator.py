@@ -1,16 +1,16 @@
-import json
 import click
 import functools
-# from UI.click_commands.login import login
+from click_ui.utilities import ui_utils
 
 
 def is_authenticated(function):
     """Decorator for printing functions."""
     @functools.wraps(function)
     def wrapper(*args, **kwargs):
-        with open("UI/token/token.json", "r") as json_file:
-            data = json.load(json_file)
-        token = data["token"]
+        # with open("click_ui/token/token.json", "r") as json_file:
+        #     data = json.load(json_file)
+        # token = data["token"]
+        token = ui_utils.get_token()
         if token:
             # function(token, *args, **kwargs)
             function(token, *args, **kwargs)

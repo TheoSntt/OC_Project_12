@@ -1,7 +1,7 @@
 import click
 from appcontainer import app_container
-from UI.is_auth_decorator import is_authenticated
-from UI.response_printer import print_response
+from click_ui.is_auth_decorator import is_authenticated
+from click_ui.response_printer import print_response
 
 
 collab_repo = app_container.get_collab_repo()
