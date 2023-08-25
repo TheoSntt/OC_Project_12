@@ -32,7 +32,8 @@ class ContractRepository:
     # def get_client_events(self, contract_id):
     #     return self.event_dao.get_events_for_user(contract_id)
 
-    def create_contract(self, contract_data):
+    @has_permission(permission="create_contract")
+    def create_contract(self, token, contract_data):
         contract = Contract(**contract_data,
                             create_date=date.today())
         self.contract_dao.create(contract)

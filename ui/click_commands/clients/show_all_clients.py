@@ -1,22 +1,20 @@
 import click
 from appcontainer import app_container
-from click_ui.is_auth_decorator import is_authenticated
-from click_ui.response_printer import print_response
+from ui.is_auth_decorator import is_authenticated
+from ui.response_printer import print_response
 
 
 client_repo = app_container.get_client_repo()
 
 
 @click.command()
+@click.pass_obj
 @is_authenticated
-def print_stuff(token):
+def show_all_clients(session):
     """
-    Method to try somethings
+    Method to retrieve and display all clients
 
     """
+    token = session.token
     answer = client_repo.get_all(token)
     print_response(answer)
-
-
-if __name__ == '__main__':
-    print_stuff()

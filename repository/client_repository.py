@@ -32,7 +32,8 @@ class ClientRepository:
     # def get_client_events(self, client_id):
     #     return self.event_dao.get_events_for_user(client_id)
 
-    def create_client(self, client_data):
+    @has_permission(permission="create_client")
+    def create_client(self, token, client_data):
         client = Client(**client_data,
                         create_date=date.today(),
                         last_update_date=date.today())

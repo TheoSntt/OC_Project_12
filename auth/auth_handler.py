@@ -24,7 +24,7 @@ class AuthHandler:
             if self.verify_password(input_pw, user.password):
                 current_time = datetime.datetime.utcnow()
                 issued_at = current_time
-                expires_at = current_time + datetime.timedelta(minutes=10)
+                expires_at = current_time + datetime.timedelta(minutes=20)
                 payload = {'user_id': user.id,
                            'user_role': str(user.role),
                            'user_permissions': permissions[str(user.role)],
@@ -32,6 +32,7 @@ class AuthHandler:
                            "exp": expires_at}
                 token = self.jwt_handler.generate_token(payload)
                 return {"token": token,
+                        "user_id": user.id,
                         "user_to_greet": str(user)}
             else:
                 return False

@@ -1,39 +1,40 @@
 import click
-from click_ui.click_commands.login import login
-from click_ui.click_commands.collabs.create_collaborator import create_collaborator
+from ui.click_commands.login import login
+from ui.click_commands.collabs.create_collab import create_collaborator
+from ui.click_commands.clients.create_client import create_client
+from ui.click_commands.contracts.create_contract import create_contract
+from ui.click_commands.events.create_event import create_event
 # from UI.click_commands.print_stuff import print_stuff
-from click_ui.click_commands.clients.show_all_clients import show_all_clients
-from click_ui.click_commands.collabs.show_all_collabs import show_all_collaborators
-from click_ui.click_commands.contracts.show_all_contracts import show_all_contracts
-from click_ui.click_commands.events.show_all_events import show_all_events
-# from rich.panel import Panel
-# from rich.console import Console
-# from rich.padding import Padding
+from ui.click_commands.clients.show_all_clients import show_all_clients
+from ui.click_commands.collabs.show_all_collabs import show_all_collaborators
+from ui.click_commands.contracts.show_all_contracts import show_all_contracts
+from ui.click_commands.events.show_all_events import show_all_events
+from ui.display.display import Display
+from ui.utilities import ui_utils
 
-# pnl1 = Panel("[bold yellow]an old falcon", expand=False, border_style="blue")
-# pnl2 = Panel.fit("[bold yellow]an old falcon", border_style="blue")
 
-# console = Console()
-# console.print(pnl1)
-# console.print(pnl2)
+class Session(object):
+    def __init__(self, display, token, user_id):
+        self.display = display
+        self.token = token
+        self.user_id = user_id
 
 
 @click.group()
-def cli():
-    pass
+@click.pass_context
+def cli(ctx):
+    ctx.obj = Session(Display(), ui_utils.get_token(), ui_utils.get_user_id())
 
 
 cli.add_command(login)
 cli.add_command(create_collaborator)
+cli.add_command(create_client)
+cli.add_command(create_contract)
+cli.add_command(create_event)
 cli.add_command(show_all_clients)
 cli.add_command(show_all_collaborators)
 cli.add_command(show_all_contracts)
 cli.add_command(show_all_events)
-
-# @click.command()
-# @click.password_option()
-# def encrypt(password):
-#     click.echo('Encrypting password to %s' % password)
 
 
 if __name__ == '__main__':

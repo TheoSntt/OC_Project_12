@@ -37,7 +37,8 @@ class CollaboratorRepository:
     # def get_collaborator_events(self, collaborator_id):
     #     return self.event_dao.get_events_for_user(collaborator_id)
 
-    def create_collaborator(self, collaborator_data):
+    @has_permission(permission="create_collab")
+    def create_collaborator(self, token, collaborator_data):
         collaborator = Collaborator(**collaborator_data)
         collaborator.password = auth_handler.hash_password(collaborator.password)
         self.collaborator_dao.create(collaborator)

@@ -31,7 +31,8 @@ class EventRepository:
     # def get_client_events(self, event_id):
     #     return self.event_dao.get_events_for_user(event_id)
 
-    def create_event(self, event_data):
+    @has_permission(permission="create_event")
+    def create_event(self, token, event_data):
         event = Event(**event_data)
         self.event_dao.create(event)
         return event
