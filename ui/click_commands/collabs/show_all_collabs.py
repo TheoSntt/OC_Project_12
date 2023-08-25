@@ -1,6 +1,7 @@
 import click
 from appcontainer import app_container
 from ui.is_auth_decorator import is_authenticated
+from ui.response_printer import print_response
 
 
 collab_repo = app_container.get_collab_repo()
@@ -16,6 +17,5 @@ def show_all_collaborators(session):
     """
     token = session.token
     answer = collab_repo.get_all(token)
-    # print_response(answer)
-    for a in answer:
-        session.display.log_styled(a, style="yellow")
+    if print_response(answer, session):
+        session.display.collabsAsTable(answer)

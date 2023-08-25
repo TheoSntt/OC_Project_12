@@ -17,4 +17,5 @@ def show_all_clients(session):
     """
     token = session.token
     answer = client_repo.get_all(token)
-    print_response(answer)
+    if print_response(answer, session):
+        session.display.clientsAsTable(answer)

@@ -36,7 +36,7 @@ permissions = {
         # "delete_event",
     ],
     "Support": [
-        "read_client",
+        # "read_client",
         "create_client",
         "update_client",
         "delete_client",

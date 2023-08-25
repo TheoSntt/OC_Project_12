@@ -3,6 +3,7 @@ from rich.panel import Panel
 from typing import Tuple, Optional
 from rich import box
 import pyinputplus as pyip
+from rich.table import Table
 
 
 class Display:
@@ -38,3 +39,60 @@ class Display:
                                       blockRegexes=[r"."])
         app_name = pyip.inputStr("App Name ✏️  ")
         return (client_id, client_secret, app_name)
+
+    def clientsAsTable(self, clients) -> None:
+        table = Table(
+            show_header=True,
+            box=box.ROUNDED,
+            show_lines=True,
+            padding=(0, 1, 1, 0),
+            border_style="yellow"
+        )
+        table.add_column("ID", justify="center")
+        table.add_column("Name", justify="center")
+        table.add_column("Surname", justify="center")
+        table.add_column("Email", justify="center")
+        table.add_column("Telephone", justify="center")
+        table.add_column("Company", justify="center")
+        table.add_column("First exchange", justify="center")
+        table.add_column("Last exchange", justify="center")
+        table.add_column("Commercial contact", justify="center")
+
+        for client in clients:
+            table.add_row(
+                str(client.id),
+                client.name,
+                client.surname,
+                client.email,
+                client.telephone,
+                client.enterprise_name,
+                str(client.create_date),
+                str(client.last_update_date),
+                str(client.contact)
+            )
+        self._console.print(table)
+
+    def collabsAsTable(self, clients) -> None:
+        table = Table(
+            show_header=True,
+            box=box.ROUNDED,
+            show_lines=True,
+            padding=(0, 1, 1, 0),
+            border_style="yellow"
+        )
+        table.add_column("ID", justify="center")
+        table.add_column("Name", justify="center")
+        table.add_column("Surname", justify="center")
+        table.add_column("Email", justify="center")
+        table.add_column("Telephone", justify="center")
+        table.add_column("Role", justify="center")
+        for client in clients:
+            table.add_row(
+                str(client.id),
+                client.name,
+                client.surname,
+                client.email,
+                client.telephone,
+                str(client.role)
+            )
+        self._console.print(table)

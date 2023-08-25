@@ -1,13 +1,15 @@
-import click
 import jwt
 
 
-def print_response(answer):
+def print_response(answer, session):
     if answer is jwt.ExpiredSignatureError:
-        click.echo("Your token is expired. Please login again")
+        session.display.error("Your token is expired. Please login again")
+        return False
     elif answer is jwt.DecodeError:
-        click.echo("Your token is invalid. Please login again")
+        session.display.error("Your token is invalid. Please login again")
+        return False
     if answer is None:
-        click.echo("You are not authorized to perform this operation.")
+        session.display.error("You are not authorized to perform this operation.")
+        return False
     else:
-        click.echo(answer)
+        return True

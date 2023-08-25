@@ -11,5 +11,6 @@ def is_authenticated(function):
             # function(token, *args, **kwargs)
             function(*args, **kwargs)
         else:
-            click.echo("You either are not logged in or your token has expired.\nYou need to login first to access this command")
+            args[0].display.error("You either are not logged in or your token has expired."
+                                  "\nYou need to login first to access this command")
     return wrapper
