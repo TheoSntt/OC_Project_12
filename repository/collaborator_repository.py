@@ -42,7 +42,7 @@ class CollaboratorRepository:
         collaborator = Collaborator(**collaborator_data)
         collaborator.password = auth_handler.hash_password(collaborator.password)
         self.collaborator_dao.create(collaborator)
-        return collaborator
+        return [collaborator]
 
     def update_collaborator(self, collaborator_id, new_data):
         collaborator = self.collaborator_dao.fetch_by_id(collaborator_id)

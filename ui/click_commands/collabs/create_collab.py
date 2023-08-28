@@ -4,6 +4,7 @@ from ui.click_commands.validators import validate_email
 from ui.click_commands.validators import validate_telephone
 from ui.response_printer import print_response
 from ui.is_auth_decorator import is_authenticated
+from ui.display.messages import messages
 
 
 collab_repo = app_container.get_collab_repo()
@@ -44,4 +45,6 @@ def create_collaborator(session, name, surname, email, telephone, role, username
 
     }
     answer = collab_repo.create_collaborator(token, data)
-    print_response(answer)
+    if print_response(answer, session):
+        session.display.log_styled(messages.creation_sucess("collaborator"), style="green")
+        session.display.collabsAsTable(answer)

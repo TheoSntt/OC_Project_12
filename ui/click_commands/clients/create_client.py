@@ -4,6 +4,7 @@ from ui.click_commands.validators import validate_email
 from ui.click_commands.validators import validate_telephone
 from ui.response_printer import print_response
 from ui.is_auth_decorator import is_authenticated
+from ui.display.messages import messages
 
 
 client_repo = app_container.get_client_repo()
@@ -19,7 +20,7 @@ client_repo = app_container.get_client_repo()
 @is_authenticated
 def create_client(session, name, surname, email, telephone, enterprise_name):
     """
-    Creates a new collaborator in the app.
+    Creates a new client in the app.
 
     NAME: The name of the client to be created.
     SURNAME: The surname of the client to be created.
@@ -38,4 +39,6 @@ def create_client(session, name, surname, email, telephone, enterprise_name):
         'contact_id': session.user_id
     }
     answer = client_repo.create_client(token, data)
-    print_response(answer)
+    if print_response(answer, session):
+        session.display.log_styled(messages.creation_sucess("client"), style="green")
+        session.display.clientsAsTable(answer)

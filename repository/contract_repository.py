@@ -37,7 +37,7 @@ class ContractRepository:
         contract = Contract(**contract_data,
                             create_date=date.today())
         self.contract_dao.create(contract)
-        return contract
+        return [contract]
 
     def update_contract(self, contract_id, new_data):
         contract = self.contract_dao.fetch_by_id(contract_id)

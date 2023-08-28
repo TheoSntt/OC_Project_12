@@ -40,9 +40,10 @@ class ClientRepository:
         # client.create_date = date.today()
         # client.last_update_date = date.today()
         self.client_dao.create(client)
-        return client
+        return [client]
 
-    def update_client(self, client_id, new_data):
+    @has_permission(permission="update_client")
+    def update_client(self, token, client_id, new_data):
         client = self.client_dao.fetch_by_id(client_id)
         if client:
             # Update user's data based on new_data
@@ -50,10 +51,12 @@ class ClientRepository:
             client.surname = new_data.get('surname', client.surname)
             client.email = new_data.get('email', client.email)
             client.telephone = new_data.get('telephone', client.telephone)
+            client.enterprise_name = new_data.get('enterprise_name', client.enterprise_name)
             # client.create_date = new_data.get('create_date', client.create_date)
             client.last_update_date = date.today()
             client.contact_id = new_data.get('contact_id', client.contact_id)
             self.client_dao.update(client)
+            return [client]
 
     def delete_client(self, client_id):
         client = self.client_dao.fetch_by_id(client_id)

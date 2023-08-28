@@ -2,6 +2,7 @@ import click
 from appcontainer import app_container
 from ui.response_printer import print_response
 from ui.is_auth_decorator import is_authenticated
+from ui.display.messages import messages
 
 
 contract_repo = app_container.get_contract_repo()
@@ -35,4 +36,6 @@ def create_contract(session, legal_id, price, remaining_to_pay, status, client):
         'client_id': client
     }
     answer = contract_repo.create_contract(token, data)
-    print_response(answer)
+    if print_response(answer, session):
+        session.display.log_styled(messages.creation_sucess("contract"), style="green")
+        session.display.contractsAsTable(answer)

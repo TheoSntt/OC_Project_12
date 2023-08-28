@@ -4,6 +4,7 @@ from ui.click_commands.collabs.create_collab import create_collaborator
 from ui.click_commands.clients.create_client import create_client
 from ui.click_commands.contracts.create_contract import create_contract
 from ui.click_commands.events.create_event import create_event
+from ui.click_commands.clients.update_client import update_client
 # from UI.click_commands.print_stuff import print_stuff
 from ui.click_commands.clients.show_all_clients import show_all_clients
 from ui.click_commands.collabs.show_all_collabs import show_all_collaborators
@@ -31,6 +32,7 @@ cli.add_command(create_collaborator)
 cli.add_command(create_client)
 cli.add_command(create_contract)
 cli.add_command(create_event)
+cli.add_command(update_client)
 cli.add_command(show_all_clients)
 cli.add_command(show_all_collaborators)
 cli.add_command(show_all_contracts)

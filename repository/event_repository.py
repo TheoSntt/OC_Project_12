@@ -35,7 +35,7 @@ class EventRepository:
     def create_event(self, token, event_data):
         event = Event(**event_data)
         self.event_dao.create(event)
-        return event
+        return [event]
 
     def update_eventt(self, event_id, new_data):
         event = self.event_dao.fetch_by_id(event_id)
