@@ -17,4 +17,5 @@ def show_all_contracts(session):
     """
     token = session.token
     answer = contract_repo.get_all(token)
-    print_response(answer)
+    if print_response(answer, session):
+        session.display.contractsAsTable(answer)

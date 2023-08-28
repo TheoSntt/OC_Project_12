@@ -1,5 +1,5 @@
-import click
 import functools
+from ui.display.messages import messages
 
 
 def is_authenticated(function):
@@ -11,6 +11,5 @@ def is_authenticated(function):
             # function(token, *args, **kwargs)
             function(*args, **kwargs)
         else:
-            args[0].display.error("You either are not logged in or your token has expired."
-                                  "\nYou need to login first to access this command")
+            args[0].display.error(messages.LOCAL_TOKEN_MISSING_OR_EXPIRED)
     return wrapper

@@ -17,4 +17,5 @@ def show_all_events(session):
     """
     token = session.token
     answer = event_repo.get_all(token)
-    print_response(answer)
+    if print_response(answer, session):
+        session.display.eventsAsTable(answer)
