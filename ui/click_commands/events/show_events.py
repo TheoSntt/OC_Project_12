@@ -4,18 +4,18 @@ from ui.is_auth_decorator import is_authenticated
 from ui.response_printer import print_response
 
 
-collab_repo = app_container.get_collab_repo()
+event_repo = app_container.get_event_repo()
 
 
 @click.command()
 @click.pass_obj
 @is_authenticated
-def show_all_collaborators(session):
+def show_events(session):
     """
-    Method to retrieve and display all collaborators
+    Method to retrieve and display all clients
 
     """
     token = session.token
-    answer = collab_repo.get_all(token)
+    answer = event_repo.get_all(token)
     if print_response(answer, session):
-        session.display.collabsAsTable(answer)
+        session.display.eventsAsTable(answer)

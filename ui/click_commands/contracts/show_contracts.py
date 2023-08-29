@@ -4,18 +4,18 @@ from ui.is_auth_decorator import is_authenticated
 from ui.response_printer import print_response
 
 
-client_repo = app_container.get_client_repo()
+contract_repo = app_container.get_contract_repo()
 
 
 @click.command()
 @click.pass_obj
 @is_authenticated
-def show_all_clients(session):
+def show_contracts(session):
     """
-    Method to retrieve and display all clients
+    Method to retrieve and display all contracts
 
     """
     token = session.token
-    answer = client_repo.get_all(token)
+    answer = contract_repo.get_all(token)
     if print_response(answer, session):
-        session.display.clientsAsTable(answer)
+        session.display.contractsAsTable(answer)

@@ -12,10 +12,10 @@ from ui.click_commands.clients.delete_client import delete_client
 from ui.click_commands.collabs.delete_collab import delete_collaborator
 from ui.click_commands.contracts.delete_contract import delete_contract
 from ui.click_commands.events.delete_event import delete_event
-from ui.click_commands.clients.show_all_clients import show_all_clients
-from ui.click_commands.collabs.show_all_collabs import show_all_collaborators
-from ui.click_commands.contracts.show_all_contracts import show_all_contracts
-from ui.click_commands.events.show_all_events import show_all_events
+from ui.click_commands.clients.show_clients import show_clients
+from ui.click_commands.collabs.show_collabs import show_collaborators
+from ui.click_commands.contracts.show_contracts import show_contracts
+from ui.click_commands.events.show_events import show_events
 from ui.display.display import Display
 from ui.utilities import ui_utils
 
@@ -46,10 +46,10 @@ cli.add_command(delete_client)
 cli.add_command(delete_collaborator)
 cli.add_command(delete_contract)
 cli.add_command(delete_event)
-cli.add_command(show_all_clients)
-cli.add_command(show_all_collaborators)
-cli.add_command(show_all_contracts)
-cli.add_command(show_all_events)
+cli.add_command(show_clients)
+cli.add_command(show_collaborators)
+cli.add_command(show_contracts)
+cli.add_command(show_events)
 
 
 if __name__ == '__main__':
