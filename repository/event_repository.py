@@ -53,10 +53,12 @@ class EventRepository:
             self.event_dao.update(event)
             return [event]
 
-    def delete_event(self, event_id):
+    @has_permission(permission="delete_event")
+    def delete_event(self, token, event_id):
         event = self.event_dao.fetch_by_id(event_id)
         if event:
             self.event_dao.delete(event)
+            return [event]
 
     # def add_client(self)
     # def add_event(self)

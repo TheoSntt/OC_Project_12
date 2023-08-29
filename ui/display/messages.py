@@ -13,8 +13,8 @@ class Messages:
     def update_sucess(self, model):
         return f"The following {model} has successfully being updated."
 
-    def delete_sucess(self, model):
-        return f"The following {model} has successfully being deleted."
+    def delete_sucess(self, model, name):
+        return f"The following {model} has successfully being deleted : {name}"
 
 
 messages = Messages()

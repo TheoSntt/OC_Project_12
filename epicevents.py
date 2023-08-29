@@ -8,6 +8,10 @@ from ui.click_commands.clients.update_client import update_client
 from ui.click_commands.collabs.update_collab import update_collaborator
 from ui.click_commands.contracts.update_contract import update_contract
 from ui.click_commands.events.update_event import update_event
+from ui.click_commands.clients.delete_client import delete_client
+from ui.click_commands.collabs.delete_collab import delete_collaborator
+from ui.click_commands.contracts.delete_contract import delete_contract
+from ui.click_commands.events.delete_event import delete_event
 from ui.click_commands.clients.show_all_clients import show_all_clients
 from ui.click_commands.collabs.show_all_collabs import show_all_collaborators
 from ui.click_commands.contracts.show_all_contracts import show_all_contracts
@@ -38,6 +42,10 @@ cli.add_command(update_client)
 cli.add_command(update_collaborator)
 cli.add_command(update_contract)
 cli.add_command(update_event)
+cli.add_command(delete_client)
+cli.add_command(delete_collaborator)
+cli.add_command(delete_contract)
+cli.add_command(delete_event)
 cli.add_command(show_all_clients)
 cli.add_command(show_all_collaborators)
 cli.add_command(show_all_contracts)

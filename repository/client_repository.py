@@ -58,10 +58,12 @@ class ClientRepository:
             self.client_dao.update(client)
             return [client]
 
-    def delete_client(self, client_id):
+    @has_permission(permission="delete_client")
+    def delete_client(self, token, client_id):
         client = self.client_dao.fetch_by_id(client_id)
         if client:
             self.client_dao.delete(client)
+            return [client]
 
     # def add_client(self)
     # def add_event(self)

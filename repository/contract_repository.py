@@ -53,10 +53,12 @@ class ContractRepository:
             self.contract_dao.update(contract)
             return [contract]
 
-    def delete_contract(self, contract_id):
+    @has_permission(permission="delete_contract")
+    def delete_contract(self, token, contract_id):
         contract = self.contract_dao.fetch_by_id(contract_id)
         if contract:
             self.contract_dao.delete(contract)
+            return [contract]
 
     # def add_client(self)
     # def add_event(self)

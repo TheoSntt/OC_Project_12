@@ -62,10 +62,12 @@ class CollaboratorRepository:
             self.collaborator_dao.update(collaborator)
             return [collaborator]
 
-    def delete_collaborator(self, collaborator_id):
+    @has_permission(permission="delete_collab")
+    def delete_collaborator(self, token, collaborator_id):
         collaborator = self.collaborator_dao.fetch_by_id(collaborator_id)
         if collaborator:
             self.collaborator_dao.delete(collaborator)
+            return [collaborator]
 
     # def add_client(self)
     # def add_event(self)
