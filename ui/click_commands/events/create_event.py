@@ -2,6 +2,7 @@ import click
 from appcontainer import app_container
 from ui.response_printer import print_response
 from ui.is_auth_decorator import is_authenticated
+from ui.display.messages import messages
 
 
 event_repo = app_container.get_event_repo()
@@ -44,4 +45,6 @@ def create_event(session, title, start_date, end_date, location, attendees, comm
         'contract_id': contract,
     }
     answer = event_repo.create_event(token, data)
-    print_response(answer)
+    if print_response(answer, session):
+        session.display.log_styled(messages.creation_sucess("event"), style="green")
+        session.display.eventsAsTable(answer)
