@@ -1,4 +1,6 @@
 from models.collaborator import Collaborator
+from sqlalchemy import and_
+from dao.sanitize_input import sanitize_input
 
 
 class CollaboratorDao:
@@ -11,8 +13,15 @@ class CollaboratorDao:
     def get_all(self):
         return self.db_session.query(Collaborator).all()
 
-    def get_by_expression(self, expression):
-        return self.db_session.query(Collaborator).filter(expression).all()
+    def get_by_expression(self, filters):
+        filter_conditions = []
+        for field, value in filters.items():
+            column = getattr(Collaborator, field, None)
+            if column is not None:
+                filter_conditions.append(column == sanitize_input(value))
+        # Combine the filter conditions using the 'and_' function
+        combined_filter = and_(*filter_conditions)
+        return self.db_session.query(Collaborator).filter(combined_filter)
 
     def create(self, collaborator):
         self.db_session.add(collaborator)
