@@ -36,6 +36,8 @@ class AuthHandler:
                         "user_to_greet": str(user)}
             else:
                 return False
+        else:
+            return False
 
     def verify_token(self, token):
         payload = self.jwt_handler.verify_jwt_token(token)

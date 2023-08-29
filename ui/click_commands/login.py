@@ -1,5 +1,4 @@
 import click
-import os
 from appcontainer import app_container
 from ui.utilities import ui_utils
 
@@ -18,8 +17,8 @@ def login(session, username, password):
 
     """
     answer = auth_handler.verify_login_attempt(collab_repo, username, password)
-    token = answer["token"]
-    if token:
+    if answer:
+        token = answer["token"]
         # Store token
         ui_utils.store_token(token, answer["user_id"])
 
