@@ -27,7 +27,9 @@ class ClientRepository:
         return self.client_dao.fetch_by_id(client_id)
 
     @has_permission(permission="read_client")
-    def get_all(self, token):
+    def get(self, token, filters):
+        if filters != {}:
+            return self.client_dao.get_by_expression(filters)
         return self.client_dao.get_all()
     # def get_client_events(self, client_id):
     #     return self.event_dao.get_events_for_user(client_id)

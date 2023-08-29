@@ -21,7 +21,7 @@ class ClientDao:
                 filter_conditions.append(column == sanitize_input(value))
         # Combine the filter conditions using the 'and_' function
         combined_filter = and_(*filter_conditions)
-        return self.db_session.query(Client).filter(combined_filter)
+        return self.db_session.query(Client).filter(combined_filter).all()
 
     def create(self, client):
         self.db_session.add(client)

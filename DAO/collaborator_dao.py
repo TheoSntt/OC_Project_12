@@ -23,6 +23,9 @@ class CollaboratorDao:
         combined_filter = and_(*filter_conditions)
         return self.db_session.query(Collaborator).filter(combined_filter)
 
+    def get_by_username(self, username):
+        return self.db_session.query(Collaborator).filter(Collaborator.username == username).all()
+
     def create(self, collaborator):
         self.db_session.add(collaborator)
         self.db_session.commit()

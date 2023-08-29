@@ -29,13 +29,16 @@ class CollaboratorRepository:
         return self.collaborator_dao.fetch_by_id(collaborator_id)
 
     @has_permission(permission="read_collab")
-    def get_all(self, token):
+    def get(self, token, filters):
+        if filters != {}:
+            return self.collaborator_dao.get_by_expression(filters)
         return self.collaborator_dao.get_all()
+        # return self.collaborator_dao.get_all()
 
     def get_by_username(self, username):
-        return self.collaborator_dao.get_by_expression(Collaborator.username == username)
-    # def get_collaborator_events(self, collaborator_id):
-    #     return self.event_dao.get_events_for_user(collaborator_id)
+        # return self.collaborator_dao.get_by_expression(Collaborator.username == username)
+        # return self.collaborator_dao.get_by_expression({"username": username})
+        return self.collaborator_dao.get_by_username(username)
 
     @has_permission(permission="create_collab")
     def create_collaborator(self, token, collaborator_data):
