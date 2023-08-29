@@ -37,7 +37,8 @@ class EventRepository:
         self.event_dao.create(event)
         return [event]
 
-    def update_eventt(self, event_id, new_data):
+    @has_permission(permission="update_event")
+    def update_event(self, token, event_id, new_data):
         event = self.event_dao.fetch_by_id(event_id)
         if event:
             # Update user's data based on new_data
@@ -50,6 +51,7 @@ class EventRepository:
             event.support_id = new_data.get('support_id', event.support_id)
             event.contract_id = new_data.get('contract_id', event.contract_id)
             self.event_dao.update(event)
+            return [event]
 
     def delete_event(self, event_id):
         event = self.event_dao.fetch_by_id(event_id)

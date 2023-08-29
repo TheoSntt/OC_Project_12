@@ -44,7 +44,8 @@ class CollaboratorRepository:
         self.collaborator_dao.create(collaborator)
         return [collaborator]
 
-    def update_collaborator(self, collaborator_id, new_data):
+    @has_permission(permission="update_collab")
+    def update_collaborator(self, token, collaborator_id, new_data):
         collaborator = self.collaborator_dao.fetch_by_id(collaborator_id)
         if collaborator:
             # Update user's data based on new_data
@@ -59,6 +60,7 @@ class CollaboratorRepository:
             collaborator.telephone = new_data.get('telephone', collaborator.telephone)
             collaborator.role_id = new_data.get('role_id', collaborator.role_id)
             self.collaborator_dao.update(collaborator)
+            return [collaborator]
 
     def delete_collaborator(self, collaborator_id):
         collaborator = self.collaborator_dao.fetch_by_id(collaborator_id)

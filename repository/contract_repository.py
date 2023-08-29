@@ -39,16 +39,19 @@ class ContractRepository:
         self.contract_dao.create(contract)
         return [contract]
 
-    def update_contract(self, contract_id, new_data):
+    @has_permission(permission="update_contract")
+    def update_contract(self, token, contract_id, new_data):
         contract = self.contract_dao.fetch_by_id(contract_id)
         if contract:
             # Update user's data based on new_data
+            contract.legal_id = new_data.get('legal_id', contract.legal_id)
             contract.price = new_data.get('price', contract.price)
             contract.remaining_to_pay = new_data.get('remaining_to_pay', contract.remaining_to_pay)
             # contract.create_date = new_data.get('create_date', contract.create_date)
             contract.status = new_data.get('status', contract.status)
             contract.client_id = new_data.get('client_id', contract.client_id)
             self.contract_dao.update(contract)
+            return [contract]
 
     def delete_contract(self, contract_id):
         contract = self.contract_dao.fetch_by_id(contract_id)
