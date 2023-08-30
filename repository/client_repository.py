@@ -7,7 +7,7 @@ from models.client import Client
 # from models.contract import Contract
 # from models.event import Event
 from datetime import date
-from repository.has_permission_decorator import has_permission
+from repository.authorization_decorators import has_permission, is_clients_contact
 
 
 class ClientRepository:
@@ -41,6 +41,7 @@ class ClientRepository:
         return [client]
 
     @has_permission(permission="update_client")
+    @is_clients_contact
     def update_client(self, token, client_id, new_data):
         client = self.client_dao.fetch_by_id(client_id)
         if client:

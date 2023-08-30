@@ -7,7 +7,7 @@ from models.collaborator import Collaborator
 # from models.contract import Contract
 # from models.event import Event
 from auth.auth_handler import AuthHandler
-from repository.has_permission_decorator import has_permission
+from repository.authorization_decorators import has_permission
 
 
 auth_handler = AuthHandler()

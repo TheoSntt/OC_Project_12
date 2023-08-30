@@ -6,7 +6,7 @@
 # from models.collaborator import Collaborator
 # from models.contract import Contract
 from models.event import Event
-from repository.has_permission_decorator import has_permission
+from repository.authorization_decorators import has_permission, is_events_support
 
 
 class EventRepository:
@@ -38,6 +38,7 @@ class EventRepository:
         return [event]
 
     @has_permission(permission="update_event")
+    @is_events_support
     def update_event(self, token, event_id, new_data):
         event = self.event_dao.fetch_by_id(event_id)
         if event:

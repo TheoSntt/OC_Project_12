@@ -7,7 +7,7 @@
 from models.contract import Contract
 # from models.event import Event
 from datetime import date
-from repository.has_permission_decorator import has_permission
+from repository.authorization_decorators import has_permission, is_contracts_clients_contact
 
 
 class ContractRepository:
@@ -40,6 +40,7 @@ class ContractRepository:
         return [contract]
 
     @has_permission(permission="update_contract")
+    @is_contracts_clients_contact
     def update_contract(self, token, contract_id, new_data):
         contract = self.contract_dao.fetch_by_id(contract_id)
         if contract:
