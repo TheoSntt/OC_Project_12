@@ -25,5 +25,4 @@ def delete_event(session, id, confirm):
         token = session.token
         answer = event_repo.delete_event(token, id)
         if print_response(answer, session):
-            deleted_event = answer[0]
-            session.display.log_styled(messages.delete_sucess("event", str(deleted_event)), style="green")
+            session.display.log_styled(messages.delete_sucess("event", str(answer)), style="green")

@@ -47,4 +47,4 @@ def create_collaborator(session, name, surname, email, telephone, role, username
     answer = collab_repo.create_collaborator(token, data)
     if print_response(answer, session):
         session.display.log_styled(messages.creation_sucess("collaborator"), style="green")
-        session.display.collabsAsTable(answer)
+        session.display.collabsAsTable([answer])

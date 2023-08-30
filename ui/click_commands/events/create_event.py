@@ -47,4 +47,4 @@ def create_event(session, title, start_date, end_date, location, attendees, comm
     answer = event_repo.create_event(token, data)
     if print_response(answer, session):
         session.display.log_styled(messages.creation_sucess("event"), style="green")
-        session.display.eventsAsTable(answer)
+        session.display.eventsAsTable([answer])

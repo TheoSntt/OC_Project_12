@@ -41,8 +41,8 @@ class CollaboratorRepository:
     def create_collaborator(self, token, collaborator_data):
         collaborator = Collaborator(**collaborator_data)
         collaborator.password = auth_handler.hash_password(collaborator.password)
-        self.collaborator_dao.create(collaborator)
-        return [collaborator]
+        collaborator = self.collaborator_dao.create(collaborator)
+        return collaborator
 
     @has_permission(permission="update_collab")
     def update_collaborator(self, token, collaborator_id, new_data):
@@ -59,15 +59,15 @@ class CollaboratorRepository:
             collaborator.email = new_data.get('email', collaborator.email)
             collaborator.telephone = new_data.get('telephone', collaborator.telephone)
             collaborator.role_id = new_data.get('role_id', collaborator.role_id)
-            self.collaborator_dao.update(collaborator)
-            return [collaborator]
+            collaborator = self.collaborator_dao.update(collaborator)
+            return collaborator
 
     @has_permission(permission="delete_collab")
     def delete_collaborator(self, token, collaborator_id):
         collaborator = self.collaborator_dao.fetch_by_id(collaborator_id)
         if collaborator:
             self.collaborator_dao.delete(collaborator)
-            return [collaborator]
+            return collaborator
 
     # def add_client(self)
     # def add_event(self)

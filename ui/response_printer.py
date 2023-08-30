@@ -1,5 +1,6 @@
 import jwt
 from ui.display.messages import messages
+from sqlalchemy.exc import SQLAlchemyError
 
 
 def print_response(answer, session):
@@ -9,7 +10,10 @@ def print_response(answer, session):
     elif answer is jwt.DecodeError:
         session.display.error(messages.RESPONSE_INVALID_TOKEN)
         return False
-    if answer is None:
+    elif answer is SQLAlchemyError:
+        session.display.error(messages.RESPONSE_INTEGRITY_ERROR)
+        return False
+    elif answer is None:
         session.display.error(messages.RESPONSE_UNAUTHORIZED)
         return False
     else:

@@ -26,6 +26,5 @@ def delete_client(session, id, confirm):
         answer = client_repo.delete_client(token, id)
         print(answer)
         if print_response(answer, session):
-            deleted_client = answer[0]
-            session.display.log_styled(messages.delete_sucess("client", str(deleted_client)), style="green")
+            session.display.log_styled(messages.delete_sucess("client", str(answer)), style="green")
             # session.display.clientsAsTable(answer)

@@ -41,4 +41,4 @@ def create_client(session, name, surname, email, telephone, enterprise_name):
     answer = client_repo.create_client(token, data)
     if print_response(answer, session):
         session.display.log_styled(messages.creation_sucess("client"), style="green")
-        session.display.clientsAsTable(answer)
+        session.display.clientsAsTable([answer])

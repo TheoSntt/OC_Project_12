@@ -34,4 +34,4 @@ def update_contract(session, id, legal_id, price, remaining_to_pay, status, clie
         answer = contract_repo.update_contract(token, id, data)
         if print_response(answer, session):
             session.display.log_styled(messages.update_sucess("contract"), style="green")
-            session.display.contractsAsTable(answer)
+            session.display.contractsAsTable([answer])

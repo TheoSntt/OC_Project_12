@@ -25,5 +25,4 @@ def delete_contract(session, id, confirm):
         token = session.token
         answer = contract_repo.delete_contract(token, id)
         if print_response(answer, session):
-            deleted_contract = answer[0]
-            session.display.log_styled(messages.delete_sucess("contract", str(deleted_contract)), style="green")
+            session.display.log_styled(messages.delete_sucess("contract", str(answer)), style="green")

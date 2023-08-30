@@ -36,8 +36,8 @@ class ContractRepository:
     def create_contract(self, token, contract_data):
         contract = Contract(**contract_data,
                             create_date=date.today())
-        self.contract_dao.create(contract)
-        return [contract]
+        contract = self.contract_dao.create(contract)
+        return contract
 
     @has_permission(permission="update_contract")
     @is_contracts_clients_contact
@@ -51,15 +51,15 @@ class ContractRepository:
             # contract.create_date = new_data.get('create_date', contract.create_date)
             contract.status = new_data.get('status', contract.status)
             contract.client_id = new_data.get('client_id', contract.client_id)
-            self.contract_dao.update(contract)
-            return [contract]
+            contract = self.contract_dao.update(contract)
+            return contract
 
     @has_permission(permission="delete_contract")
     def delete_contract(self, token, contract_id):
         contract = self.contract_dao.fetch_by_id(contract_id)
         if contract:
             self.contract_dao.delete(contract)
-            return [contract]
+            return contract
 
     # def add_client(self)
     # def add_event(self)

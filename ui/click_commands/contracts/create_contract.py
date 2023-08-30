@@ -38,4 +38,4 @@ def create_contract(session, legal_id, price, remaining_to_pay, status, client):
     answer = contract_repo.create_contract(token, data)
     if print_response(answer, session):
         session.display.log_styled(messages.creation_sucess("contract"), style="green")
-        session.display.contractsAsTable(answer)
+        session.display.contractsAsTable([answer])

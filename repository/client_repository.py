@@ -37,8 +37,8 @@ class ClientRepository:
         client = Client(**client_data,
                         create_date=date.today(),
                         last_update_date=date.today())
-        self.client_dao.create(client)
-        return [client]
+        client = self.client_dao.create(client)
+        return client
 
     @has_permission(permission="update_client")
     @is_clients_contact
@@ -54,15 +54,15 @@ class ClientRepository:
             # client.create_date = new_data.get('create_date', client.create_date)
             client.last_update_date = date.today()
             client.contact_id = new_data.get('contact_id', client.contact_id)
-            self.client_dao.update(client)
-            return [client]
+            client = self.client_dao.update(client)
+            return client
 
     @has_permission(permission="delete_client")
     def delete_client(self, token, client_id):
         client = self.client_dao.fetch_by_id(client_id)
         if client:
             self.client_dao.delete(client)
-            return [client]
+            return client
 
     # def add_client(self)
     # def add_event(self)

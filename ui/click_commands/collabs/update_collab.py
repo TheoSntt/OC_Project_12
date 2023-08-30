@@ -38,4 +38,4 @@ def update_collaborator(session, id, name, surname, email, telephone, role_id, u
         answer = collab_repo.update_collaborator(token, id, data)
         if print_response(answer, session):
             session.display.log_styled(messages.update_sucess("collaborator"), style="green")
-            session.display.collabsAsTable(answer)
+            session.display.collabsAsTable([answer])

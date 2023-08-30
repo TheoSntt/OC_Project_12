@@ -3,6 +3,7 @@ class Messages:
         self.RESPONSE_EXPIRED_TOKEN = "Your token is expired. Please login again."
         self.RESPONSE_INVALID_TOKEN = "Your token is invalid. Please login again."
         self.RESPONSE_UNAUTHORIZED = "You are not authorized to perform this operation."
+        self.RESPONSE_INTEGRITY_ERROR = "That operation would create a duplicate in the database."
         self.LOCAL_TOKEN_MISSING_OR_EXPIRED = ("You either are not logged in or your token has expired."
                                                "\nYou need to login first to access this command.")
         self.DATA_NEEDED_FOR_UPDATE = "You have to pass at least one optionnal argument to update."

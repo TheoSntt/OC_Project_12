@@ -18,6 +18,7 @@ from ui.click_commands.contracts.show_contracts import show_contracts
 from ui.click_commands.events.show_events import show_events
 from ui.display.display import Display
 from ui.utilities import ui_utils
+from sentry_manager import SentryManager
 
 
 class Session(object):
@@ -30,6 +31,7 @@ class Session(object):
 @click.group()
 @click.pass_context
 def cli(ctx):
+    SentryManager.initialize()
     ctx.obj = Session(Display(), ui_utils.get_token(), ui_utils.get_user_id())
 
 

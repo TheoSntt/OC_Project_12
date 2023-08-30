@@ -25,5 +25,4 @@ def delete_collaborator(session, id, confirm):
         token = session.token
         answer = collab_repo.delete_collaborator(token, id)
         if print_response(answer, session):
-            deleted_collab = answer[0]
-            session.display.log_styled(messages.delete_sucess("collaborator", str(deleted_collab)), style="green")
+            session.display.log_styled(messages.delete_sucess("collaborator", str(answer)), style="green")

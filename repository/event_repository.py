@@ -34,8 +34,8 @@ class EventRepository:
     @has_permission(permission="create_event")
     def create_event(self, token, event_data):
         event = Event(**event_data)
-        self.event_dao.create(event)
-        return [event]
+        event = self.event_dao.create(event)
+        return event
 
     @has_permission(permission="update_event")
     @is_events_support
@@ -51,15 +51,15 @@ class EventRepository:
             event.comments = new_data.get('comments', event.comments)
             event.support_id = new_data.get('support_id', event.support_id)
             event.contract_id = new_data.get('contract_id', event.contract_id)
-            self.event_dao.update(event)
-            return [event]
+            event = self.event_dao.update(event)
+            return event
 
     @has_permission(permission="delete_event")
     def delete_event(self, token, event_id):
         event = self.event_dao.fetch_by_id(event_id)
         if event:
             self.event_dao.delete(event)
-            return [event]
+            return event
 
     # def add_client(self)
     # def add_event(self)

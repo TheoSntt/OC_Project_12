@@ -37,4 +37,4 @@ def update_event(session, id, title, start_date, end_date, location, attendees, 
         answer = event_repo.update_event(token, id, data)
         if print_response(answer, session):
             session.display.log_styled(messages.update_sucess("event"), style="green")
-            session.display.eventsAsTable(answer)
+            session.display.eventsAsTable([answer])

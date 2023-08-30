@@ -37,4 +37,4 @@ def update_client(session, id, name, surname, email, telephone, enterprise_name,
         answer = client_repo.update_client(token, id, data)
         if print_response(answer, session):
             session.display.log_styled(messages.update_sucess("client"), style="green")
-            session.display.clientsAsTable(answer)
+            session.display.clientsAsTable([answer])
