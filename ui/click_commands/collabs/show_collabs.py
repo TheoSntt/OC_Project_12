@@ -22,7 +22,7 @@ def show_collaborators(session, id, name, surname, email, telephone, role_id):
 
     """
     token = session.token
-    excluded_keys = ['show_clients', 'session', 'token', 'excluded_keys']
+    excluded_keys = ['show_collaborators', 'session', 'token', 'excluded_keys']
     filters = {key: value for key, value in locals().items() if key not in excluded_keys and value is not None}
     answer = collab_repo.get(token, filters)
     if print_response(answer, session):

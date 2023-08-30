@@ -33,11 +33,8 @@ class CollaboratorRepository:
         if filters != {}:
             return self.collaborator_dao.get_by_expression(filters)
         return self.collaborator_dao.get_all()
-        # return self.collaborator_dao.get_all()
 
     def get_by_username(self, username):
-        # return self.collaborator_dao.get_by_expression(Collaborator.username == username)
-        # return self.collaborator_dao.get_by_expression({"username": username})
         return self.collaborator_dao.get_by_username(username)
 
     @has_permission(permission="create_collab")

@@ -26,10 +26,10 @@ class EventRepository:
         return self.event_dao.fetch_by_id(event_id)
 
     @has_permission(permission="read_event")
-    def get_all(self, token):
+    def get(self, token, filters):
+        if filters != {}:
+            return self.event_dao.get_by_expression(filters)
         return self.event_dao.get_all()
-    # def get_client_events(self, event_id):
-    #     return self.event_dao.get_events_for_user(event_id)
 
     @has_permission(permission="create_event")
     def create_event(self, token, event_data):

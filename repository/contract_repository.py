@@ -27,10 +27,10 @@ class ContractRepository:
         return self.contract_dao.fetch_by_id(contract_id)
 
     @has_permission(permission="read_contract")
-    def get_all(self, token):
+    def get(self, token, filters):
+        if filters != {}:
+            return self.contract_dao.get_by_expression(filters)
         return self.contract_dao.get_all()
-    # def get_client_events(self, contract_id):
-    #     return self.event_dao.get_events_for_user(contract_id)
 
     @has_permission(permission="create_contract")
     def create_contract(self, token, contract_data):

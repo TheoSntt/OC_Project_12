@@ -31,16 +31,12 @@ class ClientRepository:
         if filters != {}:
             return self.client_dao.get_by_expression(filters)
         return self.client_dao.get_all()
-    # def get_client_events(self, client_id):
-    #     return self.event_dao.get_events_for_user(client_id)
 
     @has_permission(permission="create_client")
     def create_client(self, token, client_data):
         client = Client(**client_data,
                         create_date=date.today(),
                         last_update_date=date.today())
-        # client.create_date = date.today()
-        # client.last_update_date = date.today()
         self.client_dao.create(client)
         return [client]
 

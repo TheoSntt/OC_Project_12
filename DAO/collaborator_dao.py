@@ -18,7 +18,10 @@ class CollaboratorDao:
         for field, value in filters.items():
             column = getattr(Collaborator, field, None)
             if column is not None:
-                filter_conditions.append(column == sanitize_input(value))
+                if sanitize_input(value) in ['false', 'False', 'none', 'None', '']:
+                    filter_conditions.append(column.is_(None))
+                else:
+                    filter_conditions.append(column == sanitize_input(value))
         # Combine the filter conditions using the 'and_' function
         combined_filter = and_(*filter_conditions)
         return self.db_session.query(Collaborator).filter(combined_filter)
