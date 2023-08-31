@@ -35,6 +35,16 @@ pip install -r requirements.txt
 - Changer les informations de connexions à la base de données pour renseigner les nouvelles informations (informations de connexion à la BDD de l'entreprise) dans les fichiers config.ini et database/db_session.py
 - Changer les informations de clés secrètes JWT (pour l'instant récupérées depuis une variable d'environnement) pour les remplacer par une manière d'accéder à la nouvelle clé secret dans le fichier auth/jwt/jwt_handler.py
 - Changer les informations de connexion à Sentry.io contenues dans le fichier sentry_manager.py pour les remplacer par les informations au compte d'entreprise.
+- Lancer le script data_setup à l'aide de la commande suivante :
+```
+python data_setup.py
+```
+- Cela créera les tables dans la base de données ainsi que des données de test.
+- Vous pouvez ensuite vous connecter avec le compte admin par défaut (à supprimer une fois un véritable compte admin créé), en utilant les identifiants suivants :
+```
+id : admin
+pw : admin123
+```
 
 5. L'application est prête à être utilisée. Son fonctionnement correspond aux documents de conception fournis.
  
