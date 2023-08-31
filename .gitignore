@@ -1,4 +1,5 @@
 env/
+.idea
 config.ini
 .flake8
 __pycache__
