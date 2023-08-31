@@ -3,6 +3,7 @@ from sqlalchemy import and_
 from dao.sanitize_input import sanitize_input
 from dao.sentry_context_manager import capture_exceptions
 from sqlalchemy.exc import SQLAlchemyError
+import logging
 
 
 class ContractDao:
@@ -42,10 +43,16 @@ class ContractDao:
             except SQLAlchemyError:
                 return SQLAlchemyError
 
-    def update(self, contract):
+    def update(self, contract, signature):
         with capture_exceptions():
             try:
                 self.db_session.commit()
+                if signature:
+                    logging.info(f"Contract signed: ID : {contract.id},"
+                                 f"Legal ID : {contract.legal_id},"
+                                 f"Client : {str(contract.client)}"
+                                 f"Event : {str(contract.event)}")
+                    logging.error("CONTRACT SIGNED")
                 return contract
             except SQLAlchemyError:
                 return SQLAlchemyError

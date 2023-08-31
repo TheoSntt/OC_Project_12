@@ -3,6 +3,7 @@ from sqlalchemy import and_
 from dao.sanitize_input import sanitize_input
 from dao.sentry_context_manager import capture_exceptions
 from sqlalchemy.exc import SQLAlchemyError
+import logging
 
 
 class CollaboratorDao:
@@ -40,6 +41,10 @@ class CollaboratorDao:
             try:
                 self.db_session.add(collaborator)
                 self.db_session.commit()
+                logging.info(f"Collaborator created: ID {collaborator.id},"
+                             f"name : {str(collaborator)},"
+                             f"role : {str(collaborator.role)}")
+                logging.error("COLLABORATOR CREATION")
                 return collaborator
             except SQLAlchemyError:
                 return SQLAlchemyError
@@ -48,6 +53,10 @@ class CollaboratorDao:
         with capture_exceptions():
             try:
                 self.db_session.commit()
+                logging.info(f"Collaborator updated : ID {collaborator.id},"
+                             f"name : {str(collaborator)},"
+                             f"role : {str(collaborator.role)}")
+                logging.error("COLLABORATOR UPDATE")
                 return collaborator
             except SQLAlchemyError:
                 return SQLAlchemyError

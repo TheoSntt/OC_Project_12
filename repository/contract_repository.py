@@ -44,14 +44,17 @@ class ContractRepository:
     def update_contract(self, token, contract_id, new_data):
         contract = self.contract_dao.fetch_by_id(contract_id)
         if contract:
+            signature = False
             # Update user's data based on new_data
             contract.legal_id = new_data.get('legal_id', contract.legal_id)
             contract.price = new_data.get('price', contract.price)
             contract.remaining_to_pay = new_data.get('remaining_to_pay', contract.remaining_to_pay)
             # contract.create_date = new_data.get('create_date', contract.create_date)
             contract.status = new_data.get('status', contract.status)
+            if new_data.get('status') == "Signé":
+                signature = True
             contract.client_id = new_data.get('client_id', contract.client_id)
-            contract = self.contract_dao.update(contract)
+            contract = self.contract_dao.update(contract, signature)
             return contract
 
     @has_permission(permission="delete_contract")
