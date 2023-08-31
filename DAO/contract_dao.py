@@ -4,11 +4,26 @@ from dao.sanitize_input import sanitize_input
 from dao.sentry_context_manager import capture_exceptions
 from sqlalchemy.exc import SQLAlchemyError
 import logging
+import sentry_sdk
+import os
+from sentry_sdk.integrations.sqlalchemy import SqlalchemyIntegration
+from sentry_sdk.integrations.logging import LoggingIntegration
+
+
+# sentry_sdk.init(
+#     dsn=os.environ.get("SENTRY_DSN"),
+#     integrations=[SqlalchemyIntegration(),
+#                   LoggingIntegration(level=logging.INFO)]
+#             )
 
 
 class ContractDao:
     def __init__(self, db_session):
         self.db_session = db_session
+        sentry_sdk.init(
+            dsn=os.environ.get("SENTRY_DSN"),
+            integrations=[SqlalchemyIntegration(), LoggingIntegration(level=logging.INFO)]
+            )
 
     def fetch_by_id(self, contract_id):
         with capture_exceptions():
@@ -48,11 +63,15 @@ class ContractDao:
             try:
                 self.db_session.commit()
                 if signature:
-                    logging.info(f"Contract signed: ID : {contract.id},"
-                                 f"Legal ID : {contract.legal_id},"
-                                 f"Client : {str(contract.client)}"
-                                 f"Event : {str(contract.event)}")
-                    logging.error("CONTRACT SIGNED")
+                    data = {
+                        "id": contract.id,
+                        "legal_id": contract.legal_id,
+                        "client": contract.client,
+                        "event": contract.event
+                        }
+                    with sentry_sdk.push_scope() as scope:
+                        scope.set_extra("contract_info", data)
+                        sentry_sdk.capture_message('CONTRACT SIGNED', 'info')
                 return contract
             except SQLAlchemyError:
                 return SQLAlchemyError

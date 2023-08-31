@@ -14,6 +14,6 @@ class SentryManager:
             sentry_sdk.init(
                 dsn=os.environ.get("SENTRY_DSN"),
                 integrations=[SqlalchemyIntegration(),
-                              LoggingIntegration(level=logging.INFO, event_level=logging.INFO)]
+                              LoggingIntegration(level=logging.INFO)]
             )
             cls._initialized = True

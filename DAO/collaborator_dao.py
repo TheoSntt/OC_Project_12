@@ -4,11 +4,19 @@ from dao.sanitize_input import sanitize_input
 from dao.sentry_context_manager import capture_exceptions
 from sqlalchemy.exc import SQLAlchemyError
 import logging
+import sentry_sdk
+import os
+from sentry_sdk.integrations.sqlalchemy import SqlalchemyIntegration
+from sentry_sdk.integrations.logging import LoggingIntegration
 
 
 class CollaboratorDao:
     def __init__(self, db_session):
         self.db_session = db_session
+        sentry_sdk.init(
+            dsn=os.environ.get("SENTRY_DSN"),
+            integrations=[SqlalchemyIntegration(), LoggingIntegration(level=logging.INFO)]
+            )
 
     def fetch_by_id(self, collaborator_id):
         with capture_exceptions():
@@ -41,10 +49,14 @@ class CollaboratorDao:
             try:
                 self.db_session.add(collaborator)
                 self.db_session.commit()
-                logging.info(f"Collaborator created: ID {collaborator.id},"
-                             f"name : {str(collaborator)},"
-                             f"role : {str(collaborator.role)}")
-                logging.error("COLLABORATOR CREATION")
+                data = {
+                    "id": collaborator.id,
+                    "name": str(collaborator),
+                    "role": str(collaborator.role)
+                    }
+                with sentry_sdk.push_scope() as scope:
+                    scope.set_extra("collaborator_info", data)
+                    sentry_sdk.capture_message('COLLABORATOR CREATED', 'info')
                 return collaborator
             except SQLAlchemyError:
                 return SQLAlchemyError
@@ -53,10 +65,14 @@ class CollaboratorDao:
         with capture_exceptions():
             try:
                 self.db_session.commit()
-                logging.info(f"Collaborator updated : ID {collaborator.id},"
-                             f"name : {str(collaborator)},"
-                             f"role : {str(collaborator.role)}")
-                logging.error("COLLABORATOR UPDATE")
+                data = {
+                    "id": collaborator.id,
+                    "name": str(collaborator),
+                    "role": str(collaborator.role)
+                    }
+                with sentry_sdk.push_scope() as scope:
+                    scope.set_extra("collaborator_info", data)
+                    sentry_sdk.capture_message('COLLABORATOR UPDATED', 'info')
                 return collaborator
             except SQLAlchemyError:
                 return SQLAlchemyError
