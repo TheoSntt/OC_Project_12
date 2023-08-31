@@ -39,10 +39,8 @@ pip install -r requirements.txt
 5. L'application est prête à être utilisée. Son fonctionnement correspond aux documents de conception fournis.
  
  
-BONUS : Si vous souhaitez tester vous même la conformité à la PEP8, vous pouvez installer et exécuter flake8, à l'aide des commandes suivantes :
-```		
-pip install flake8
-```
+BONUS : Si vous souhaitez tester vous même la conformité à la PEP8, vous pouvez installer et exécuter flake8, à l'aide de la commande suivante :
+
 ```		
 flake8 --exclude=env --max-line-length=119 --format=html --htmldir=rapport
 ```
