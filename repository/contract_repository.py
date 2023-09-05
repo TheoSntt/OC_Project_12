@@ -58,6 +58,7 @@ class ContractRepository:
             return contract
 
     @has_permission(permission="delete_contract")
+    @is_contracts_clients_contact
     def delete_contract(self, token, contract_id):
         contract = self.contract_dao.fetch_by_id(contract_id)
         if contract:

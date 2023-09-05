@@ -58,6 +58,7 @@ class ClientRepository:
             return client
 
     @has_permission(permission="delete_client")
+    @is_clients_contact
     def delete_client(self, token, client_id):
         client = self.client_dao.fetch_by_id(client_id)
         if client:

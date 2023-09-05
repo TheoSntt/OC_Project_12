@@ -8,9 +8,9 @@ class TestClientDAO:
 
     def test_fetch_by_id(self, mocker):
         db_session_mock = mocker.Mock()
-        db_session_mock.get.return_value = "an client"
+        db_session_mock.get.return_value = "a client"
         sut = ClientDao(db_session_mock)
-        assert sut.fetch_by_id(1) == "an client"
+        assert sut.fetch_by_id(1) == "a client"
 
     def test_get_all(self, mocker):
         db_session_mock = mocker.Mock()
@@ -45,10 +45,10 @@ class TestClientDAO:
     def test_update(self, mocker):
         db_session_mock = mocker.Mock()
         sut = ClientDao(db_session_mock)
-        result = sut.update("an client")
+        result = sut.update("a client")
         calls = [call.commit()]
         db_session_mock.assert_has_calls(calls)
-        assert result == "an client"
+        assert result == "a client"
 
     def test_update_Integrity_error(self, mocker):
         db_session_mock = mocker.Mock()
@@ -62,6 +62,6 @@ class TestClientDAO:
     def test_delete(self, mocker):
         db_session_mock = mocker.Mock()
         sut = ClientDao(db_session_mock)
-        sut.delete("an client")
-        calls = [call.delete('an client'), call.commit()]
+        sut.delete("a client")
+        calls = [call.delete('a client'), call.commit()]
         db_session_mock.assert_has_calls(calls)
