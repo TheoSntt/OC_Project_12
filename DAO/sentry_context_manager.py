@@ -8,5 +8,3 @@ def capture_exceptions():
         yield
     except Exception as e:
         sentry_sdk.capture_exception(e)
-        # Optionally, you can choose to raise the exception here
-        # raise e

@@ -29,7 +29,7 @@ class ClientDao:
                         filter_conditions.append(column == sanitize_input(value))
             # Combine the filter conditions using the 'and_' function
             combined_filter = and_(*filter_conditions)
-            return self.db_session.query(Client).filter(combined_filter).all()
+            return self.db_session.query(Client).filter(combined_filter)
 
     def create(self, client):
         with capture_exceptions():

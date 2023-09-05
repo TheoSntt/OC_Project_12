@@ -25,7 +25,7 @@ def show_events(session, id, title, start_date, end_date, location, attendees, c
 
     """
     token = session.token
-    excluded_keys = ['show_contracts', 'session', 'token', 'excluded_keys']
+    excluded_keys = ['show_events', 'session', 'token', 'excluded_keys']
     filters = {key: value for key, value in locals().items() if key not in excluded_keys and value is not None}
     answer = event_repo.get(token, filters)
     if print_response(answer, session):

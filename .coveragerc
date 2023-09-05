@@ -1,0 +1,2 @@
+[run]
+omit = tests/*,ui/*,data_setup.py
