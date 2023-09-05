@@ -26,14 +26,3 @@ class Contract(Base):
 
     def __repr__(self):
         return f'Contrat {self.legal_id}'
-
-    def detailed_view(self):
-        detailed_view_string = (f"Identifiant : {self.id}"
-                                f"\nIdentifiant métier : {self.legal_id}"
-                                f"\nPrix : {self.price}"
-                                f"\nRestant à payer : {self.remaining_to_pay}"
-                                f"\nDate de création : {self.create_date}"
-                                f"\nStatut : {self.status}"
-                                f"\nClient : {self.client}"
-                                f"\nEvénement associé : {self.event}")
-        return detailed_view_string

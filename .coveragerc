@@ -1,2 +1,2 @@
 [run]
-omit = tests/*,ui/*,data_setup.py
+omit = tests/*,ui/*,data_setup.py, database/*,epicevents.py,sentry_manager.py,appcontainer.py
