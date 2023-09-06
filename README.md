@@ -39,7 +39,7 @@ pip install -r requirements.txt
 ```
 python data_setup.py
 ```
-- Cela créera les tables dans la base de données ainsi que des données de test.
+- Cela créera les tables dans la base de données ainsi que des données de test. Pensez bien à utiliser un utilisateur en Base de données ayant les droits nécessaires. (NB: Il faudra ensuite changer les droits de cet utilisateur -ou changer d'utilisateur dans les informations de connexion- pour appliquer le principe du moindre privilège).
 - Vous pouvez ensuite vous connecter avec le compte admin par défaut (à supprimer une fois un véritable compte admin créé), en utilant les identifiants suivants :
 ```
 id : admin
@@ -49,8 +49,19 @@ pw : admin123
 5. L'application est prête à être utilisée. Son fonctionnement correspond aux documents de conception fournis.
  
  
-BONUS : Si vous souhaitez tester vous même la conformité à la PEP8, vous pouvez installer et exécuter flake8, à l'aide de la commande suivante :
+## BONUS :
+Si vous souhaitez tester vous même la conformité à la PEP8, vous pouvez exécuter flake8, à l'aide de la commande suivante :
 
 ```		
-flake8 --exclude=env --max-line-length=119 --format=html --htmldir=rapport
+flake8 --format=html --htmldir=rapport
 ```
+## BONUS 2 :
+Si vous souhaitez tester vous même la couverture de test, vous pouvez exécuter pytest-cov, à l'aide de la commande suivante :
+
+```		
+pytest --cov=. --cov-report html
+```
+
+## Schéma de la base de données
+
+![UML(1)](https://github.com/TheoSntt/OC_Project_12/assets/118457519/33772aad-6c4e-4b31-b4eb-65bc8bdd7050)
