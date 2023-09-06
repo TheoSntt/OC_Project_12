@@ -48,6 +48,9 @@ pw : admin123
 
 5. L'application est prête à être utilisée. Son fonctionnement correspond aux documents de conception fournis.
  
+## Schéma de la base de données
+
+![UML(1)](https://github.com/TheoSntt/OC_Project_12/assets/118457519/33772aad-6c4e-4b31-b4eb-65bc8bdd7050)
  
 ## BONUS :
 Si vous souhaitez tester vous même la conformité à la PEP8, vous pouvez exécuter flake8, à l'aide de la commande suivante :
@@ -61,7 +64,3 @@ Si vous souhaitez tester vous même la couverture de test, vous pouvez exécuter
 ```		
 pytest --cov=. --cov-report html
 ```
-
-## Schéma de la base de données
-
-![UML(1)](https://github.com/TheoSntt/OC_Project_12/assets/118457519/33772aad-6c4e-4b31-b4eb-65bc8bdd7050)
