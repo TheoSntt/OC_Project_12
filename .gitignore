@@ -1,6 +1,5 @@
 env/
 .idea
-config.ini
 __pycache__
 test.py
 /UI/token/token.json
