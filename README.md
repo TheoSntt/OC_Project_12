@@ -2,7 +2,7 @@
 # EPICEVENTS ORM
 
 
-## Présentation du proet
+## Présentation du projet
 
 Le projet ORM EpicEvents est un des derniers projets réalisés dans le cadre de ma formation OpenClassrooms.  
 Le but de ce projet était, après 2 projets dédiés à Django, de nous faire réaliser un backend complet d'application sans l'utiliser. Ainsi, j'ai dû développer par moi-même de nombreuses fonctionnalités qui sont gérées de manières très automatiques par Django comme la gestion des tokens JWT, la gestion des champs de mot de passe (hashing, salting), les permissions, etc.  
