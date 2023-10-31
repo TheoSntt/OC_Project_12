@@ -2,17 +2,21 @@
 # EPICEVENTS ORM
 
 
-## Avertissements
+## Présentation du proet
 
-Ce repo contient l'application ORM d'Epicevents.
-Du fait de la structure du projet, exécuter localement le code contenu dans ce repository demanderait beaucoup de configuration.
-Ce travail devra néanmoins être fait pour le déploiement de l'application.
+Le projet ORM EpicEvents est un des derniers projets réalisés dans le cadre de ma formation OpenClassrooms.  
+Le but de ce projet était, après 2 projets dédiés à Django, de nous faire réaliser un backend complet d'application sans l'utiliser. Ainsi, j'ai dû développer par moi-même de nombreuses fonctionnalités qui sont gérées de manières très automatiques par Django comme la gestion des tokens JWT, la gestion des champs de mot de passe (hashing, salting), les permissions, etc.  
+Cette expérience a été très intéressante pour approfondir ma compréhension de ces mécanismes. Les bonnes pratiques apprises précédemment, comme l'utilisation d'un linter, et la mise en place d'une bonne couverture de tests ont été mises en application dans le cadre de ce projet.  
+En termes de technologies, ce projet m'a aussi beaucoup apporté : Il m'a permis d'utiliser pour la première fois MySQL (j'étais plus familier avec SQLite et PostGres), ainsi que SQLAlchemy. C'est également sur ce projet que j'ai configuré l'outil de suivi des erreurs Sentry.  
+Ce projet était aussi très intéressant en termes d'architecture et de Design Patterns. Sans l'architecture prédéfinie de Django, j'ai dû trouver des solutions pour rendre l'architecture la plus claire et la plus modulaire possible. J'en ai profité pour mettre en application pour la première fois les Design Patterns DAO et Repository.  
 
 ## Mise en place et exécution en local de l'application.
 
+### Configuration de base (environnement virtuel et dépendances)
+
 1. Téléchargez le projet depuis Github. Soit directement (format zip), soit en clonant le projet en utilisant la commande suivante dans Git Bash :  
 ```
-git clone https://github.com/TheoSntt/OC_Project_12
+git clone https://github.com/TheoSntt/epicevents-orm 
 ```
 2. Créez un environnement virtuel Python en exécutant la commande suivantes dans le Terminal de votre choix :
 ```
@@ -30,23 +34,60 @@ env/Scripts/activate.bat
 ```
 pip install -r requirements.txt
 ```
-4. La configuration de base est terminée. Les étapes de configuration suivantes sont nécessaires pour le bon fonctionnement de l'application dans un nouvel environnement :
+4. La configuration de base (configuration normale d'un projet python) est terminée.  
 
-- Changer les informations de connexions à la base de données pour renseigner les nouvelles informations (informations de connexion à la BDD de l'entreprise) dans les fichiers config.ini et database/db_session.py
-- Changer les informations de clés secrètes JWT (pour l'instant récupérées depuis une variable d'environnement) pour les remplacer par une manière d'accéder à la nouvelle clé secret dans le fichier auth/jwt/jwt_handler.py
-- Changer les informations de connexion à Sentry.io contenues dans le fichier sentry_manager.py pour les remplacer par les informations au compte d'entreprise.
-- Lancer le script data_setup à l'aide de la commande suivante :
+### Configuration avancée
+
+Ce projet était le premier de ma formation OpenClassrooms pour lequel il était demandé de prêter une attention particulière à des notions de sécurité, notamment dans la manière de gérer les informations confidentielles (clés de sécurité) sur le répo distant. De ce fait, les différents identifiants, mots de passe, clés de sécurité, et autres bases de données ne sont pas présents dans le répo.  
+La confifuration nécessaire pour exécuter l'application en local est donc importante. Mais pas impossible. La preuve, étape par étape :  
+
+1. Créer une base de données à l'aide de MySQL nommée epicevents. Si vous gardez la configuration par défaut de MySQL, elle devrait être accessible sur l'hôte
+```
+localhost
+```
+et le port
+```
+3306
+```
+Si l'un de ces éléments est différent dans votre configuration locale, il faudra répercuter ces changements dans le fichier config.ini qui indique le nom, hôte et port de la base de données.  
+Si vous utilisez un autre système de gestion de base de données que MySQL, il faudra effectuer les changements nécessaires dans le fichier database/db_session.py qui définit l'objet session de l'ORM SQLAlchemy.  
+
+2. Il faut maintenant renseigner l'identifiant et le mot de passe d'un utilisateur MySQL ayant les droits sur le BDD nouvellement créée (soit votre utilisateur root, soit un utilisateur créé pour cet effet) au sein de variables d'environnement.
+La procédure à suivre dépend selon votre OS. Les variables d'environnement doivent se nommer
+```
+MYSQL_PROJECT_USERNAME
+```
+et
+```
+MYSQL_PROJECT_PW
+```
+Si vous utilisez d'autres noms, il faudra répercuter ce changement dans le fichier database/db_session.py  
+
+3. Vous pouvez maintenant exécuter le script permettant la création des tables et des données de tests. Pour créer uniquement les tables, lancer la commande
+```
+python data_setup.py --add_demo_data=False
+```
+Pour créer également quelques données de test pour peupler les tables :
 ```
 python data_setup.py
 ```
-- Cela créera les tables dans la base de données ainsi que des données de test. Pensez bien à utiliser un utilisateur en Base de données ayant les droits nécessaires. (NB: Il faudra ensuite changer les droits de cet utilisateur -ou changer d'utilisateur dans les informations de connexion- pour appliquer le principe du moindre privilège).
-- Vous pouvez ensuite vous connecter avec le compte admin par défaut (à supprimer une fois un véritable compte admin créé), en utilant les identifiants suivants :
+4. Il ne reste plus qu'à créer 2 variables d'environnement : la clé secrète JWT et le DSN Sentry. La clé secrète JWT peut être une chaîne de caractère de votre choix, le DSN vous est fourni par Sentry lors de la création d'un nouveau projet sur la plateforme. Les noms de ces variables doivent être :
+```
+MYSQL_PROJECT_JWT_KEY
+```
+et
+```
+SENTRY_DSN
+```
+Si vous utilisez d'autres noms de variable, il faudra répercuter ces changements dans les fichiers auth/jwt/jwt_handler.py et sentry_manager.py, respectivement.
+
+5. Vous pouvez ensuite vous connecter avec le compte admin par défaut (à supprimer une fois un véritable compte admin créé), en utilant les identifiants suivants :
 ```
 id : admin
 pw : admin123
 ```
 
-5. L'application est prête à être utilisée. Son fonctionnement correspond aux documents de conception fournis.
+5. L'application est prête à être utilisée !
  
 ## Schéma de la base de données
 
