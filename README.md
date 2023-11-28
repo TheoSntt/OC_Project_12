@@ -1,10 +1,10 @@
 
-# EPICEVENTS ORM
+# EPICEVENTS CRM
 
 
 ## Présentation du projet
 
-Le projet ORM EpicEvents est un des derniers projets réalisés dans le cadre de ma formation OpenClassrooms.  
+Le projet CRM EpicEvents est un des derniers projets réalisés dans le cadre de ma formation OpenClassrooms.  
 Le but de ce projet était, après 2 projets dédiés à Django, de nous faire réaliser un backend complet d'application sans l'utiliser. Ainsi, j'ai dû développer par moi-même de nombreuses fonctionnalités qui sont gérées de manières très automatiques par Django comme la gestion des tokens JWT, la gestion des champs de mot de passe (hashing, salting), les permissions, etc.  
 Cette expérience a été très intéressante pour approfondir ma compréhension de ces mécanismes. Les bonnes pratiques apprises précédemment, comme l'utilisation d'un linter, et la mise en place d'une bonne couverture de tests ont été mises en application dans le cadre de ce projet.  
 En termes de technologies, ce projet m'a aussi beaucoup apporté : Il m'a permis d'utiliser pour la première fois MySQL (j'étais plus familier avec SQLite et PostGres), ainsi que SQLAlchemy. C'est également sur ce projet que j'ai configuré l'outil de suivi des erreurs Sentry.  
